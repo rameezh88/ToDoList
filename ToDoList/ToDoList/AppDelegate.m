@@ -9,9 +9,9 @@
 #import "AppDelegate.h"
 #import "RootNavViewController.h"
 #import "HomeViewController.h"
+#import "ToDoListDataService.h"
 
 @interface AppDelegate ()
-
 @end
 
 @implementation AppDelegate
@@ -25,6 +25,7 @@
     self.window.rootViewController = rootNavController;
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
+    [ToDoListDataService sharedService]; // Initialize data service singleton.
     return YES;
 }
 

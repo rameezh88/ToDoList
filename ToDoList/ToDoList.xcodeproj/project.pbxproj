@@ -12,13 +12,15 @@
 		652445B51BE166D00020A2F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 652445B41BE166D00020A2F5 /* Assets.xcassets */; };
 		652445C71BE16A630020A2F5 /* ToDoList.m in Sources */ = {isa = PBXBuildFile; fileRef = 652445C61BE16A630020A2F5 /* ToDoList.m */; };
 		652445CA1BE16ACD0020A2F5 /* ToDoListItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 652445C91BE16ACD0020A2F5 /* ToDoListItem.m */; };
-		652445CD1BE16B4E0020A2F5 /* ToDoListDatabaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 652445CC1BE16B4E0020A2F5 /* ToDoListDatabaseManager.m */; };
+		652445CD1BE16B4E0020A2F5 /* ToDoListDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 652445CC1BE16B4E0020A2F5 /* ToDoListDatabase.m */; };
 		652445D11BE16CCF0020A2F5 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 652445CF1BE16CCF0020A2F5 /* HomeViewController.m */; };
 		652445D21BE16CCF0020A2F5 /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 652445D01BE16CCF0020A2F5 /* HomeViewController.xib */; };
 		652445D61BE16D470020A2F5 /* RootNavViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 652445D51BE16D470020A2F5 /* RootNavViewController.m */; };
 		652445DC1BE16E0F0020A2F5 /* UIAlertView+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 652445D91BE16E0F0020A2F5 /* UIAlertView+Blocks.m */; };
 		652445DD1BE16E0F0020A2F5 /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = 652445DB1BE16E0F0020A2F5 /* UIColor+Hex.m */; };
 		652445E01BE16F800020A2F5 /* RIButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 652445DF1BE16F800020A2F5 /* RIButtonItem.m */; };
+		652445E31BE177DE0020A2F5 /* ToDoListDataService.m in Sources */ = {isa = PBXBuildFile; fileRef = 652445E21BE177DE0020A2F5 /* ToDoListDataService.m */; };
+		652445E51BE179510020A2F5 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 652445E41BE179510020A2F5 /* libsqlite3.tbd */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,8 +35,8 @@
 		652445C61BE16A630020A2F5 /* ToDoList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToDoList.m; sourceTree = "<group>"; };
 		652445C81BE16ACD0020A2F5 /* ToDoListItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToDoListItem.h; sourceTree = "<group>"; };
 		652445C91BE16ACD0020A2F5 /* ToDoListItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToDoListItem.m; sourceTree = "<group>"; };
-		652445CB1BE16B4E0020A2F5 /* ToDoListDatabaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToDoListDatabaseManager.h; sourceTree = "<group>"; };
-		652445CC1BE16B4E0020A2F5 /* ToDoListDatabaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToDoListDatabaseManager.m; sourceTree = "<group>"; };
+		652445CB1BE16B4E0020A2F5 /* ToDoListDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToDoListDatabase.h; sourceTree = "<group>"; };
+		652445CC1BE16B4E0020A2F5 /* ToDoListDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToDoListDatabase.m; sourceTree = "<group>"; };
 		652445CE1BE16CCF0020A2F5 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		652445CF1BE16CCF0020A2F5 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		652445D01BE16CCF0020A2F5 /* HomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
@@ -46,6 +48,9 @@
 		652445DB1BE16E0F0020A2F5 /* UIColor+Hex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Hex.m"; sourceTree = "<group>"; };
 		652445DE1BE16F800020A2F5 /* RIButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RIButtonItem.h; sourceTree = "<group>"; };
 		652445DF1BE16F800020A2F5 /* RIButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RIButtonItem.m; sourceTree = "<group>"; };
+		652445E11BE177DE0020A2F5 /* ToDoListDataService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToDoListDataService.h; sourceTree = "<group>"; };
+		652445E21BE177DE0020A2F5 /* ToDoListDataService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToDoListDataService.m; sourceTree = "<group>"; };
+		652445E41BE179510020A2F5 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				652445E51BE179510020A2F5 /* libsqlite3.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,6 +68,7 @@
 		6524459C1BE166D00020A2F5 = {
 			isa = PBXGroup;
 			children = (
+				652445E41BE179510020A2F5 /* libsqlite3.tbd */,
 				652445A71BE166D00020A2F5 /* ToDoList */,
 				652445A61BE166D00020A2F5 /* Products */,
 			);
@@ -134,8 +141,10 @@
 		652445C31BE167100020A2F5 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				652445CB1BE16B4E0020A2F5 /* ToDoListDatabaseManager.h */,
-				652445CC1BE16B4E0020A2F5 /* ToDoListDatabaseManager.m */,
+				652445CB1BE16B4E0020A2F5 /* ToDoListDatabase.h */,
+				652445CC1BE16B4E0020A2F5 /* ToDoListDatabase.m */,
+				652445E11BE177DE0020A2F5 /* ToDoListDataService.h */,
+				652445E21BE177DE0020A2F5 /* ToDoListDataService.m */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -234,8 +243,9 @@
 				652445E01BE16F800020A2F5 /* RIButtonItem.m in Sources */,
 				652445DC1BE16E0F0020A2F5 /* UIAlertView+Blocks.m in Sources */,
 				652445AD1BE166D00020A2F5 /* AppDelegate.m in Sources */,
-				652445CD1BE16B4E0020A2F5 /* ToDoListDatabaseManager.m in Sources */,
+				652445CD1BE16B4E0020A2F5 /* ToDoListDatabase.m in Sources */,
 				652445DD1BE16E0F0020A2F5 /* UIColor+Hex.m in Sources */,
+				652445E31BE177DE0020A2F5 /* ToDoListDataService.m in Sources */,
 				652445CA1BE16ACD0020A2F5 /* ToDoListItem.m in Sources */,
 				652445D61BE16D470020A2F5 /* RootNavViewController.m in Sources */,
 				652445AA1BE166D00020A2F5 /* main.m in Sources */,

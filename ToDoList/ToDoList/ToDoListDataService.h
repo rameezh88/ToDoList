@@ -1,5 +1,5 @@
 //
-//  ToDoListDatabaseManager.h
+//  ToDoListDataService.h
 //  ToDoList
 //
 //  Created by Rameez Hussain on 28/10/15.
@@ -8,6 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-@interface ToDoListDatabaseManager : NSObject
-
+@interface ToDoListDataService : NSObject
++ (id)sharedService;
 @end
