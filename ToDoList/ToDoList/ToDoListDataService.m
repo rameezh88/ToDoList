@@ -74,6 +74,32 @@
     }
 }
 
+#pragma mark - Instance methods.
+
+- (NSArray *) getAllLists {
+    return [self.database getAllToDoLists];
+}
+
+- (NSArray *) getToDoListForListId:(NSInteger) listId {
+    return [self.database getToDoListForListId:listId];
+}
+
+- (void) addListItem: (ToDoListItem *) item {
+    [self.database insertToDoListItem:item];
+}
+
+- (void) updateListItem: (ToDoListItem *) item {
+    [self.database updateToDoListItem:item];
+}
+
+- (void) addNewList: (ToDoList *) list {
+    [self.database insertList:list];
+}
+
+- (void) updateList: (ToDoList *) list {
+    [self.database updateList:list];
+}
+
 #pragma mark - ToDoListDelegate methods.
 
 - (void) databaseReadWriteUpdateCompleted {

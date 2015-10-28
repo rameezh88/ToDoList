@@ -15,6 +15,8 @@
 + (id)sharedService;
 - (NSArray *) getAllLists;
 - (NSArray *) getToDoListForListId:(NSInteger) listId;
-- (void) addListItem: (ToDoListItem *) item toListWithId: (NSInteger) listId;
+- (void) addListItem: (ToDoListItem *) item;
+- (void) updateListItem: (ToDoListItem *) item;
 - (void) addNewList: (ToDoList *) list;
+- (void) updateList: (ToDoList *) list;
 @end
