@@ -13,6 +13,12 @@
 		652445C71BE16A630020A2F5 /* ToDoList.m in Sources */ = {isa = PBXBuildFile; fileRef = 652445C61BE16A630020A2F5 /* ToDoList.m */; };
 		652445CA1BE16ACD0020A2F5 /* ToDoListItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 652445C91BE16ACD0020A2F5 /* ToDoListItem.m */; };
 		652445CD1BE16B4E0020A2F5 /* ToDoListDatabaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 652445CC1BE16B4E0020A2F5 /* ToDoListDatabaseManager.m */; };
+		652445D11BE16CCF0020A2F5 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 652445CF1BE16CCF0020A2F5 /* HomeViewController.m */; };
+		652445D21BE16CCF0020A2F5 /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 652445D01BE16CCF0020A2F5 /* HomeViewController.xib */; };
+		652445D61BE16D470020A2F5 /* RootNavViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 652445D51BE16D470020A2F5 /* RootNavViewController.m */; };
+		652445DC1BE16E0F0020A2F5 /* UIAlertView+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 652445D91BE16E0F0020A2F5 /* UIAlertView+Blocks.m */; };
+		652445DD1BE16E0F0020A2F5 /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = 652445DB1BE16E0F0020A2F5 /* UIColor+Hex.m */; };
+		652445E01BE16F800020A2F5 /* RIButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 652445DF1BE16F800020A2F5 /* RIButtonItem.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +35,17 @@
 		652445C91BE16ACD0020A2F5 /* ToDoListItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToDoListItem.m; sourceTree = "<group>"; };
 		652445CB1BE16B4E0020A2F5 /* ToDoListDatabaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToDoListDatabaseManager.h; sourceTree = "<group>"; };
 		652445CC1BE16B4E0020A2F5 /* ToDoListDatabaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToDoListDatabaseManager.m; sourceTree = "<group>"; };
+		652445CE1BE16CCF0020A2F5 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
+		652445CF1BE16CCF0020A2F5 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
+		652445D01BE16CCF0020A2F5 /* HomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
+		652445D41BE16D470020A2F5 /* RootNavViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootNavViewController.h; sourceTree = "<group>"; };
+		652445D51BE16D470020A2F5 /* RootNavViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootNavViewController.m; sourceTree = "<group>"; };
+		652445D81BE16E0F0020A2F5 /* UIAlertView+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+Blocks.h"; sourceTree = "<group>"; };
+		652445D91BE16E0F0020A2F5 /* UIAlertView+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+Blocks.m"; sourceTree = "<group>"; };
+		652445DA1BE16E0F0020A2F5 /* UIColor+Hex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Hex.h"; sourceTree = "<group>"; };
+		652445DB1BE16E0F0020A2F5 /* UIColor+Hex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Hex.m"; sourceTree = "<group>"; };
+		652445DE1BE16F800020A2F5 /* RIButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RIButtonItem.h; sourceTree = "<group>"; };
+		652445DF1BE16F800020A2F5 /* RIButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RIButtonItem.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +78,7 @@
 		652445A71BE166D00020A2F5 /* ToDoList */ = {
 			isa = PBXGroup;
 			children = (
+				652445D71BE16DCC0020A2F5 /* Utils */,
 				652445C31BE167100020A2F5 /* Services */,
 				652445C21BE167060020A2F5 /* Controllers */,
 				652445C11BE166F70020A2F5 /* Views */,
@@ -97,6 +115,7 @@
 		652445C11BE166F70020A2F5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				652445D31BE16CD90020A2F5 /* XIB */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -104,6 +123,10 @@
 		652445C21BE167060020A2F5 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				652445CE1BE16CCF0020A2F5 /* HomeViewController.h */,
+				652445CF1BE16CCF0020A2F5 /* HomeViewController.m */,
+				652445D41BE16D470020A2F5 /* RootNavViewController.h */,
+				652445D51BE16D470020A2F5 /* RootNavViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -115,6 +138,27 @@
 				652445CC1BE16B4E0020A2F5 /* ToDoListDatabaseManager.m */,
 			);
 			name = Services;
+			sourceTree = "<group>";
+		};
+		652445D31BE16CD90020A2F5 /* XIB */ = {
+			isa = PBXGroup;
+			children = (
+				652445D01BE16CCF0020A2F5 /* HomeViewController.xib */,
+			);
+			name = XIB;
+			sourceTree = "<group>";
+		};
+		652445D71BE16DCC0020A2F5 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				652445DE1BE16F800020A2F5 /* RIButtonItem.h */,
+				652445DF1BE16F800020A2F5 /* RIButtonItem.m */,
+				652445D81BE16E0F0020A2F5 /* UIAlertView+Blocks.h */,
+				652445D91BE16E0F0020A2F5 /* UIAlertView+Blocks.m */,
+				652445DA1BE16E0F0020A2F5 /* UIColor+Hex.h */,
+				652445DB1BE16E0F0020A2F5 /* UIColor+Hex.m */,
+			);
+			name = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -175,6 +219,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				652445B51BE166D00020A2F5 /* Assets.xcassets in Resources */,
+				652445D21BE16CCF0020A2F5 /* HomeViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -186,10 +231,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				652445C71BE16A630020A2F5 /* ToDoList.m in Sources */,
+				652445E01BE16F800020A2F5 /* RIButtonItem.m in Sources */,
+				652445DC1BE16E0F0020A2F5 /* UIAlertView+Blocks.m in Sources */,
 				652445AD1BE166D00020A2F5 /* AppDelegate.m in Sources */,
 				652445CD1BE16B4E0020A2F5 /* ToDoListDatabaseManager.m in Sources */,
+				652445DD1BE16E0F0020A2F5 /* UIColor+Hex.m in Sources */,
 				652445CA1BE16ACD0020A2F5 /* ToDoListItem.m in Sources */,
+				652445D61BE16D470020A2F5 /* RootNavViewController.m in Sources */,
 				652445AA1BE166D00020A2F5 /* main.m in Sources */,
+				652445D11BE16CCF0020A2F5 /* HomeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
