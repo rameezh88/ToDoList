@@ -62,6 +62,68 @@ static NSString * syncronized_object = @"Syncronized";
     return myDate;
 }
 
+- (NSString *) stringFromDate: (NSDate *) date {
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
+    return [dateFormat stringFromDate:date];
+}
+
+- (void) updateToDoListItem:(ToDoListItem *)listItem {
+    NSInvocationOperation *insertOperation = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(insertToDoListItem:) object:listItem];
+    [self addDatabaseOperation:insertOperation toQueue:self.databaseOperationQueue];
+}
+
+
+- (void) insertToDoListItem: (ToDoListItem *)listItem {
+    @synchronized (kDatabaseOperation) {
+        NSString *sql = [NSString stringWithFormat:@"INSERT OR REPLACE INTO %s (id,todo_list_id,text,checked,created) VALUES (%ld, %ld, '%@', %ld, '%@')", [kToDoListItemsTable UTF8String], (long)listItem.itemId, (long)listItem.listId, listItem.itemText, (long)listItem.checked, [self stringFromDate:[NSDate new]]];
+        sqlite3_stmt * insertStatement;
+        int retVal = sqlite3_prepare_v2(_sqlite3db, [sql UTF8String], -1, &insertStatement, NULL);
+        if (retVal == SQLITE_OK) {
+            char * errMsg;
+            int rc = sqlite3_exec(_sqlite3db, [sql UTF8String] ,NULL,NULL,&errMsg);
+            if(SQLITE_OK != rc)
+            {
+                NSLog(@"Failed to insert record  rc:%d, msg=%s",rc,errMsg);
+            } else {
+                NSLog(@"#%s:%d:Sqlite Success. Inserted category.", __FUNCTION__, __LINE__);
+            }
+        } else {
+            const char * err = sqlite3_errmsg(_sqlite3db);
+            NSLog(@"#%s:%d:Sqlite Error: %s", __FUNCTION__, __LINE__, err);
+        }
+        sqlite3_finalize(insertStatement);
+    }
+}
+
+- (void) updateList:(ToDoList *)list {
+    NSInvocationOperation *insertOperation = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(insertList:) object:list];
+    [self addDatabaseOperation:insertOperation toQueue:self.databaseOperationQueue];
+}
+
+- (void) insertList: (ToDoList *) list {
+    @synchronized (kDatabaseOperation) {
+        NSString *sql = [NSString stringWithFormat:@"INSERT OR REPLACE INTO %s (id,name,modified) VALUES (%ld,'%@','%@')", [kToDoListTable UTF8String], (long)list.listId, list.listName, [self stringFromDate:[NSDate new]]];
+        sqlite3_stmt * insertStatement;
+        int retVal = sqlite3_prepare_v2(_sqlite3db, [sql UTF8String], -1, &insertStatement, NULL);
+        if (retVal == SQLITE_OK) {
+            char * errMsg;
+            int rc = sqlite3_exec(_sqlite3db, [sql UTF8String] ,NULL,NULL,&errMsg);
+            if(SQLITE_OK != rc)
+            {
+                NSLog(@"Failed to insert record  rc:%d, msg=%s",rc,errMsg);
+            } else {
+                NSLog(@"#%s:%d:Sqlite Success. Inserted category.", __FUNCTION__, __LINE__);
+            }
+        } else {
+            const char * err = sqlite3_errmsg(_sqlite3db);
+            NSLog(@"#%s:%d:Sqlite Error: %s", __FUNCTION__, __LINE__, err);
+        }
+        sqlite3_finalize(insertStatement);
+    }
+}
+
+
 - (NSArray *) getAllToDoLists {
     if (!_sqlite3db) {
         NSLog(@"No db initialized");

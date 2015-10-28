@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
+@class ToDoList;
+@class ToDoListItem;
+
 @protocol ToDoListDatabaseDelegate <NSObject>
 
 - (void) databaseReadWriteUpdateCompleted;
@@ -21,6 +24,10 @@
 - (id) initWithFile:(NSString *)path;
 - (NSArray *) getAllToDoLists;
 - (NSArray *) getToDoListForListId: (NSInteger) listId;
+- (void) updateList:(ToDoList *)list;
+- (void) insertList: (ToDoList *) list;
+- (void) updateToDoListItem:(ToDoListItem *)listItem;
+- (void) insertToDoListItem: (ToDoListItem *)listItem;
 - (void) deleteListItemWithId: (NSInteger) itemId;
 - (void) deleteToDoListWithId: (NSInteger) itemId;
 @end
