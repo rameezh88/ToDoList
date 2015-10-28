@@ -7,9 +7,13 @@
 //
 
 #import "ToDoListDatabase.h"
+#import "ToDoList.h"
+#import "ToDoListItem.h"
 #import "sqlite3.h"
 
-static const NSString *kDatabaseOperation = @"database_operation";
+static NSString * const kDatabaseOperation = @"database_operation";
+static NSString * const kToDoListTable = @"todo_lists";
+static NSString * const kToDoListItemsTable = @"list_items";
 
 @interface ToDoListDatabase ()
 
@@ -48,6 +52,101 @@ static NSString * syncronized_object = @"Syncronized";
 }
 
 #pragma mark - Helpers.
+
+- (NSDate *) dateFromString: (char *) dateStr {
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
+    NSString *DateTimeString = [NSString stringWithUTF8String:dateStr];
+    NSLog(@"DateTimeString = %@", DateTimeString);
+    NSDate *myDate =[dateFormat dateFromString:DateTimeString];
+    return myDate;
+}
+
+- (NSArray *) getAllToDoLists {
+    if (!_sqlite3db) {
+        NSLog(@"No db initialized");
+        return nil;
+    }
+    @synchronized(syncronized_object) {
+        NSMutableArray * arr = nil;
+        NSString *sql = [NSString stringWithFormat:@"select id, list_name, modified from %@", kToDoListTable];
+        sqlite3_stmt * selectStatement;
+        int retVal = sqlite3_prepare_v2(_sqlite3db, [sql UTF8String], -1, &selectStatement, NULL);
+        if (retVal == SQLITE_OK) {
+            NSUInteger listId;
+            char *nameStr;
+            NSString *name;
+            NSDate *modified;
+            arr = [[NSMutableArray alloc] initWithCapacity:8];
+            ToDoList *list;
+            while (sqlite3_step(selectStatement) == SQLITE_ROW) {
+                listId = sqlite3_column_int(selectStatement, 0);
+                nameStr = (char *)sqlite3_column_text(selectStatement, 1);
+                char *dateTime = (char *)sqlite3_column_text(selectStatement, 2);
+                modified = [self dateFromString:dateTime];
+                name = [NSString stringWithCString:nameStr encoding:NSUTF8StringEncoding];
+                list = [ToDoList new];
+                list.listId = listId;
+                list.listName = name;
+                list.lastModified = modified;
+                [arr addObject:list];
+            }
+        } else {
+            const char * err = sqlite3_errmsg(_sqlite3db);
+            NSLog(@"#%s:%d:Sqlite Error: %s", __FUNCTION__, __LINE__, err);
+        }
+        sqlite3_finalize(selectStatement);
+        return arr;
+    }
+}
+
+- (NSArray *) getToDoListForListId: (NSInteger) listId {
+    if (!_sqlite3db) {
+        NSLog(@"No db initialized");
+        return nil;
+    }
+    @synchronized(syncronized_object) {
+        NSMutableArray * arr = nil;
+        NSString *sql = [NSString stringWithFormat:@"select id, todo_list_id, text, checked, created from %@", kToDoListItemsTable];
+        sqlite3_stmt * selectStatement;
+        int retVal = sqlite3_prepare_v2(_sqlite3db, [sql UTF8String], -1, &selectStatement, NULL);
+        if (retVal == SQLITE_OK) {
+            NSUInteger listId, listItemId;
+            BOOL checked;
+            char *text, *created;
+            arr = [[NSMutableArray alloc] initWithCapacity:8];
+            ToDoListItem *listItem;
+            while (sqlite3_step(selectStatement) == SQLITE_ROW) {
+                listItemId = sqlite3_column_int(selectStatement, 0);
+                listId = sqlite3_column_int(selectStatement, 1);
+                text = (char *)sqlite3_column_text(selectStatement, 2);
+                checked = sqlite3_column_int(selectStatement, 3);
+                created = (char *)sqlite3_column_text(selectStatement, 4);
+                NSDate *itemCreated = [self dateFromString:created];
+                NSString *textStr = [NSString stringWithCString:text encoding:NSUTF8StringEncoding];
+                listItem.itemId = listItemId;
+                listItem.listId = listId;
+                listItem.itemText = textStr;
+                listItem.checked = checked;
+                listItem.created = itemCreated;
+                [arr addObject:listItem];
+            }
+        } else {
+            const char * err = sqlite3_errmsg(_sqlite3db);
+            NSLog(@"#%s:%d:Sqlite Error: %s", __FUNCTION__, __LINE__, err);
+        }
+        sqlite3_finalize(selectStatement);
+        return arr;
+    }
+}
+
+- (void) deleteListItemWithId: (NSInteger) itemId {
+    [self deleteItemWithId:itemId fromTable:kToDoListItemsTable primaryKey:@"id"];
+}
+
+- (void) deleteToDoListWithId: (NSInteger) itemId {
+    [self deleteItemWithId:itemId fromTable:kToDoListTable primaryKey:@"id"];
+}
 
 - (BOOL) deleteItemWithId:(NSInteger)itemId fromTable:(NSString*)tableName primaryKey:(NSString*)primaryKey
 {

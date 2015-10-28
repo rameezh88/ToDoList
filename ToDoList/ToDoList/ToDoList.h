@@ -10,5 +10,6 @@
 
 @interface ToDoList : NSObject
 @property (nonatomic, strong) NSString *listName;
+@property (nonatomic, strong) NSDate *lastModified;
 @property NSInteger listId;
 @end

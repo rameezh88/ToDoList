@@ -19,5 +19,8 @@
 @property (nonatomic, weak) id<ToDoListDatabaseDelegate> delegate;
 
 - (id) initWithFile:(NSString *)path;
-
+- (NSArray *) getAllToDoLists;
+- (NSArray *) getToDoListForListId: (NSInteger) listId;
+- (void) deleteListItemWithId: (NSInteger) itemId;
+- (void) deleteToDoListWithId: (NSInteger) itemId;
 @end

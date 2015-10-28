@@ -8,6 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
+@class ToDoListItem;
+@class ToDoList;
+
 @interface ToDoListDataService : NSObject
 + (id)sharedService;
+- (NSArray *) getAllLists;
+- (NSArray *) getToDoListForListId:(NSInteger) listId;
+- (void) addListItem: (ToDoListItem *) item toListWithId: (NSInteger) listId;
+- (void) addNewList: (ToDoList *) list;
 @end
