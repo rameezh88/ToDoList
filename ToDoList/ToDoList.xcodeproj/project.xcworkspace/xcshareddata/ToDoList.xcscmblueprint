@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "9681CB0AB5BF77DA121A702FDAFFE8536D8C9DFE",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "9681CB0AB5BF77DA121A702FDAFFE8536D8C9DFE" : 0,
+    "F75B61FBB847283088626F6D38EDC242C3C9A067" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "BCC99444-80D4-414B-BC42-2F6FE1DBB349",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "9681CB0AB5BF77DA121A702FDAFFE8536D8C9DFE" : "ToDoList\/",
+    "F75B61FBB847283088626F6D38EDC242C3C9A067" : "..\/ericssonquizgame-ios"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "ToDoList",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "ToDoList\/ToDoList.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/rameezh88\/ToDoList.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "9681CB0AB5BF77DA121A702FDAFFE8536D8C9DFE"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/bitbucket.org\/isolve\/ericssonquizgame-ios.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "F75B61FBB847283088626F6D38EDC242C3C9A067"
+    }
+  ]
+}

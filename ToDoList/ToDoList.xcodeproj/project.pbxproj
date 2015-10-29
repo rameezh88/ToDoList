@@ -21,6 +21,8 @@
 		652445E01BE16F800020A2F5 /* RIButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 652445DF1BE16F800020A2F5 /* RIButtonItem.m */; };
 		652445E31BE177DE0020A2F5 /* ToDoListDataService.m in Sources */ = {isa = PBXBuildFile; fileRef = 652445E21BE177DE0020A2F5 /* ToDoListDataService.m */; };
 		652445E51BE179510020A2F5 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 652445E41BE179510020A2F5 /* libsqlite3.tbd */; };
+		6545A4D41BE192D700A4E9DE /* Globals.m in Sources */ = {isa = PBXBuildFile; fileRef = 6545A4D31BE192D700A4E9DE /* Globals.m */; };
+		6545A4D61BE197D300A4E9DE /* todolist.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 652445C41BE16A370020A2F5 /* todolist.sqlite */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,7 +32,7 @@
 		652445AC1BE166D00020A2F5 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		652445B41BE166D00020A2F5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		652445B91BE166D00020A2F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		652445C41BE16A370020A2F5 /* todolist.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = todolist.db; sourceTree = "<group>"; };
+		652445C41BE16A370020A2F5 /* todolist.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = todolist.sqlite; sourceTree = "<group>"; };
 		652445C51BE16A630020A2F5 /* ToDoList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToDoList.h; sourceTree = "<group>"; };
 		652445C61BE16A630020A2F5 /* ToDoList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToDoList.m; sourceTree = "<group>"; };
 		652445C81BE16ACD0020A2F5 /* ToDoListItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToDoListItem.h; sourceTree = "<group>"; };
@@ -51,6 +53,8 @@
 		652445E11BE177DE0020A2F5 /* ToDoListDataService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToDoListDataService.h; sourceTree = "<group>"; };
 		652445E21BE177DE0020A2F5 /* ToDoListDataService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToDoListDataService.m; sourceTree = "<group>"; };
 		652445E41BE179510020A2F5 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		6545A4D21BE192D700A4E9DE /* Globals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Globals.h; sourceTree = "<group>"; };
+		6545A4D31BE192D700A4E9DE /* Globals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Globals.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +89,7 @@
 		652445A71BE166D00020A2F5 /* ToDoList */ = {
 			isa = PBXGroup;
 			children = (
+				6545A4D51BE1974500A4E9DE /* Resources */,
 				652445D71BE16DCC0020A2F5 /* Utils */,
 				652445C31BE167100020A2F5 /* Services */,
 				652445C21BE167060020A2F5 /* Controllers */,
@@ -102,7 +107,6 @@
 		652445A81BE166D00020A2F5 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				652445C41BE16A370020A2F5 /* todolist.db */,
 				652445A91BE166D00020A2F5 /* main.m */,
 			);
 			name = "Supporting Files";
@@ -160,6 +164,8 @@
 		652445D71BE16DCC0020A2F5 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				6545A4D21BE192D700A4E9DE /* Globals.h */,
+				6545A4D31BE192D700A4E9DE /* Globals.m */,
 				652445DE1BE16F800020A2F5 /* RIButtonItem.h */,
 				652445DF1BE16F800020A2F5 /* RIButtonItem.m */,
 				652445D81BE16E0F0020A2F5 /* UIAlertView+Blocks.h */,
@@ -168,6 +174,14 @@
 				652445DB1BE16E0F0020A2F5 /* UIColor+Hex.m */,
 			);
 			name = Utils;
+			sourceTree = "<group>";
+		};
+		6545A4D51BE1974500A4E9DE /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				652445C41BE16A370020A2F5 /* todolist.sqlite */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -229,6 +243,7 @@
 			files = (
 				652445B51BE166D00020A2F5 /* Assets.xcassets in Resources */,
 				652445D21BE16CCF0020A2F5 /* HomeViewController.xib in Resources */,
+				6545A4D61BE197D300A4E9DE /* todolist.sqlite in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -243,6 +258,7 @@
 				652445E01BE16F800020A2F5 /* RIButtonItem.m in Sources */,
 				652445DC1BE16E0F0020A2F5 /* UIAlertView+Blocks.m in Sources */,
 				652445AD1BE166D00020A2F5 /* AppDelegate.m in Sources */,
+				6545A4D41BE192D700A4E9DE /* Globals.m in Sources */,
 				652445CD1BE16B4E0020A2F5 /* ToDoListDatabase.m in Sources */,
 				652445DD1BE16E0F0020A2F5 /* UIColor+Hex.m in Sources */,
 				652445E31BE177DE0020A2F5 /* ToDoListDataService.m in Sources */,
@@ -377,6 +393,7 @@
 				652445BE1BE166D00020A2F5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

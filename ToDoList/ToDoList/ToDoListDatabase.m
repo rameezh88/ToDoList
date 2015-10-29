@@ -86,7 +86,7 @@ static NSString * syncronized_object = @"Syncronized";
             {
                 NSLog(@"Failed to insert record  rc:%d, msg=%s",rc,errMsg);
             } else {
-                NSLog(@"#%s:%d:Sqlite Success. Inserted category.", __FUNCTION__, __LINE__);
+                NSLog(@"#%s:%d:Sqlite Success. Inserted item.", __FUNCTION__, __LINE__);
             }
         } else {
             const char * err = sqlite3_errmsg(_sqlite3db);
@@ -103,7 +103,7 @@ static NSString * syncronized_object = @"Syncronized";
 
 - (void) insertList: (ToDoList *) list {
     @synchronized (kDatabaseOperation) {
-        NSString *sql = [NSString stringWithFormat:@"INSERT OR REPLACE INTO %s (id,name,modified) VALUES (%ld,'%@','%@')", [kToDoListTable UTF8String], (long)list.listId, list.listName, [self stringFromDate:[NSDate new]]];
+        NSString *sql = [NSString stringWithFormat:@"INSERT OR REPLACE INTO %s (id,list_name,modified) VALUES (%ld,'%@','%@')", [kToDoListTable UTF8String], (long)list.listId, list.listName, [self stringFromDate:[NSDate new]]];
         sqlite3_stmt * insertStatement;
         int retVal = sqlite3_prepare_v2(_sqlite3db, [sql UTF8String], -1, &insertStatement, NULL);
         if (retVal == SQLITE_OK) {
@@ -113,7 +113,7 @@ static NSString * syncronized_object = @"Syncronized";
             {
                 NSLog(@"Failed to insert record  rc:%d, msg=%s",rc,errMsg);
             } else {
-                NSLog(@"#%s:%d:Sqlite Success. Inserted category.", __FUNCTION__, __LINE__);
+                NSLog(@"#%s:%d:Sqlite Success. Inserted item.", __FUNCTION__, __LINE__);
             }
         } else {
             const char * err = sqlite3_errmsg(_sqlite3db);

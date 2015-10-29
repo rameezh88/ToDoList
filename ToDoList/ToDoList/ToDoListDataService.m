@@ -8,6 +8,7 @@
 
 #import "ToDoListDataService.h"
 #import "ToDoListDatabase.h"
+#import "Globals.h"
 
 @interface ToDoListDataService () <ToDoListDatabaseDelegate>
 
@@ -42,7 +43,7 @@
                                                          NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
     NSString *documentDBFolderPath = [documentsDirectory stringByAppendingPathComponent:@"database"];
-    NSString *finalDatabasePath = [documentDBFolderPath stringByAppendingPathComponent:@"todolist.db"];
+    NSString *finalDatabasePath = [documentDBFolderPath stringByAppendingPathComponent:@"todolist.sqlite"];
     BOOL success = [fileManager fileExistsAtPath:finalDatabasePath];
     if (!success){
         [self copyBundledDatabase];
@@ -59,8 +60,8 @@
                                                          NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
     NSString *documentDBFolderPath = [documentsDirectory stringByAppendingPathComponent:@"database"];
-    NSString *finalDatabasePath = [documentDBFolderPath stringByAppendingPathComponent:@"todolist.db"];
-    resourceDBFolderPath = [[NSBundle mainBundle] pathForResource:@"todolist" ofType:@"db"];
+    NSString *finalDatabasePath = [documentDBFolderPath stringByAppendingPathComponent:@"todolist.sqlite"];
+    resourceDBFolderPath = [[NSBundle mainBundle] pathForResource:@"todolist" ofType:@"sqlite"];
     [fileManager createDirectoryAtPath:documentDBFolderPath withIntermediateDirectories:NO attributes:nil error:nil];
     if (![fileManager fileExistsAtPath:finalDatabasePath])
     {
@@ -103,7 +104,7 @@
 #pragma mark - ToDoListDelegate methods.
 
 - (void) databaseReadWriteUpdateCompleted {
-    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kDatabaseOperationEndedNotification object:nil];
 }
 
 
