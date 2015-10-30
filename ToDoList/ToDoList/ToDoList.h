@@ -12,4 +12,5 @@
 @property (nonatomic, strong) NSString *listName;
 @property (nonatomic, strong) NSDate *lastModified;
 @property NSInteger listId;
+- (void) updateDatabase;
 @end

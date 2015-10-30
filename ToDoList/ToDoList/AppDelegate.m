@@ -26,6 +26,7 @@
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     [ToDoListDataService sharedService]; // Initialize data service singleton.
+    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
     return YES;
 }
 

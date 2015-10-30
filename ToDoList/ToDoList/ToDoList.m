@@ -7,7 +7,12 @@
 //
 
 #import "ToDoList.h"
+#import "ToDoListDataService.h"
 
 @implementation ToDoList
+
+- (void) updateDatabase {
+    [[ToDoListDataService sharedService] updateList:self];
+}
 
 @end

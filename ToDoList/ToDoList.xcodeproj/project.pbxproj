@@ -23,6 +23,10 @@
 		652445E51BE179510020A2F5 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 652445E41BE179510020A2F5 /* libsqlite3.tbd */; };
 		6545A4D41BE192D700A4E9DE /* Globals.m in Sources */ = {isa = PBXBuildFile; fileRef = 6545A4D31BE192D700A4E9DE /* Globals.m */; };
 		6545A4D61BE197D300A4E9DE /* todolist.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 652445C41BE16A370020A2F5 /* todolist.sqlite */; };
+		6545A4DA1BE2BF7E00A4E9DE /* ListItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6545A4D81BE2BF7E00A4E9DE /* ListItemTableViewCell.m */; };
+		6545A4DB1BE2BF7E00A4E9DE /* ListItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6545A4D91BE2BF7E00A4E9DE /* ListItemTableViewCell.xib */; };
+		6545A4DE1BE2C3A300A4E9DE /* UIViewController+CommonOperations.m in Sources */ = {isa = PBXBuildFile; fileRef = 6545A4DD1BE2C3A300A4E9DE /* UIViewController+CommonOperations.m */; };
+		6545A4E11BE2D86700A4E9DE /* UITextView+VariableHeight.m in Sources */ = {isa = PBXBuildFile; fileRef = 6545A4E01BE2D86700A4E9DE /* UITextView+VariableHeight.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +59,13 @@
 		652445E41BE179510020A2F5 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		6545A4D21BE192D700A4E9DE /* Globals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Globals.h; sourceTree = "<group>"; };
 		6545A4D31BE192D700A4E9DE /* Globals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Globals.m; sourceTree = "<group>"; };
+		6545A4D71BE2BF7E00A4E9DE /* ListItemTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListItemTableViewCell.h; sourceTree = "<group>"; };
+		6545A4D81BE2BF7E00A4E9DE /* ListItemTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListItemTableViewCell.m; sourceTree = "<group>"; };
+		6545A4D91BE2BF7E00A4E9DE /* ListItemTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ListItemTableViewCell.xib; sourceTree = "<group>"; };
+		6545A4DC1BE2C3A300A4E9DE /* UIViewController+CommonOperations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+CommonOperations.h"; sourceTree = "<group>"; };
+		6545A4DD1BE2C3A300A4E9DE /* UIViewController+CommonOperations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+CommonOperations.m"; sourceTree = "<group>"; };
+		6545A4DF1BE2D86700A4E9DE /* UITextView+VariableHeight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+VariableHeight.h"; sourceTree = "<group>"; };
+		6545A4E01BE2D86700A4E9DE /* UITextView+VariableHeight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+VariableHeight.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +138,8 @@
 			isa = PBXGroup;
 			children = (
 				652445D31BE16CD90020A2F5 /* XIB */,
+				6545A4D71BE2BF7E00A4E9DE /* ListItemTableViewCell.h */,
+				6545A4D81BE2BF7E00A4E9DE /* ListItemTableViewCell.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -156,6 +169,7 @@
 		652445D31BE16CD90020A2F5 /* XIB */ = {
 			isa = PBXGroup;
 			children = (
+				6545A4D91BE2BF7E00A4E9DE /* ListItemTableViewCell.xib */,
 				652445D01BE16CCF0020A2F5 /* HomeViewController.xib */,
 			);
 			name = XIB;
@@ -164,6 +178,8 @@
 		652445D71BE16DCC0020A2F5 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				6545A4DC1BE2C3A300A4E9DE /* UIViewController+CommonOperations.h */,
+				6545A4DD1BE2C3A300A4E9DE /* UIViewController+CommonOperations.m */,
 				6545A4D21BE192D700A4E9DE /* Globals.h */,
 				6545A4D31BE192D700A4E9DE /* Globals.m */,
 				652445DE1BE16F800020A2F5 /* RIButtonItem.h */,
@@ -172,6 +188,8 @@
 				652445D91BE16E0F0020A2F5 /* UIAlertView+Blocks.m */,
 				652445DA1BE16E0F0020A2F5 /* UIColor+Hex.h */,
 				652445DB1BE16E0F0020A2F5 /* UIColor+Hex.m */,
+				6545A4DF1BE2D86700A4E9DE /* UITextView+VariableHeight.h */,
+				6545A4E01BE2D86700A4E9DE /* UITextView+VariableHeight.m */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -241,6 +259,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6545A4DB1BE2BF7E00A4E9DE /* ListItemTableViewCell.xib in Resources */,
 				652445B51BE166D00020A2F5 /* Assets.xcassets in Resources */,
 				652445D21BE16CCF0020A2F5 /* HomeViewController.xib in Resources */,
 				6545A4D61BE197D300A4E9DE /* todolist.sqlite in Resources */,
@@ -258,12 +277,15 @@
 				652445E01BE16F800020A2F5 /* RIButtonItem.m in Sources */,
 				652445DC1BE16E0F0020A2F5 /* UIAlertView+Blocks.m in Sources */,
 				652445AD1BE166D00020A2F5 /* AppDelegate.m in Sources */,
+				6545A4DA1BE2BF7E00A4E9DE /* ListItemTableViewCell.m in Sources */,
 				6545A4D41BE192D700A4E9DE /* Globals.m in Sources */,
 				652445CD1BE16B4E0020A2F5 /* ToDoListDatabase.m in Sources */,
 				652445DD1BE16E0F0020A2F5 /* UIColor+Hex.m in Sources */,
 				652445E31BE177DE0020A2F5 /* ToDoListDataService.m in Sources */,
 				652445CA1BE16ACD0020A2F5 /* ToDoListItem.m in Sources */,
+				6545A4E11BE2D86700A4E9DE /* UITextView+VariableHeight.m in Sources */,
 				652445D61BE16D470020A2F5 /* RootNavViewController.m in Sources */,
+				6545A4DE1BE2C3A300A4E9DE /* UIViewController+CommonOperations.m in Sources */,
 				652445AA1BE166D00020A2F5 /* main.m in Sources */,
 				652445D11BE16CCF0020A2F5 /* HomeViewController.m in Sources */,
 			);
