@@ -9,6 +9,8 @@
 #import "ToDoListDataService.h"
 #import "ToDoListDatabase.h"
 #import "Globals.h"
+#import "ToDoList.h"
+#import "ToDoListItem.h"
 
 @interface ToDoListDataService () <ToDoListDatabaseDelegate>
 
@@ -94,11 +96,22 @@
 }
 
 - (void) addNewList: (ToDoList *) list {
+    NSUUID  *UUID = [NSUUID UUID];
+    NSString* stringUUID = [UUID UUIDString];
+    list.listId = stringUUID;
     [self.database insertList:list];
 }
 
 - (void) updateList: (ToDoList *) list {
     [self.database updateList:list];
+}
+
+- (void) deleteList:(ToDoList *)list {
+    [self.database deleteToDoListWithId:list.listId];
+}
+
+- (void) deleteListItem: (ToDoListItem *) listItem {
+    [self.database deleteListItemWithId:listItem.itemId];
 }
 
 #pragma mark - ToDoListDelegate methods.

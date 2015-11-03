@@ -17,6 +17,8 @@
 - (NSArray *) getToDoListForListId:(NSInteger) listId;
 - (void) addListItem: (ToDoListItem *) item;
 - (void) updateListItem: (ToDoListItem *) item;
+- (void) deleteListItem: (ToDoListItem *) listItem;
 - (void) addNewList: (ToDoList *) list;
 - (void) updateList: (ToDoList *) list;
+- (void) deleteList: (ToDoList *) list;
 @end

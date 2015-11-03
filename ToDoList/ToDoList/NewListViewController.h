@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface NewListViewController : UIViewController
+@class ToDoList;
 
+@interface NewListViewController : UIViewController
+@property (nonatomic, strong) ToDoList *toDoList;
 @end

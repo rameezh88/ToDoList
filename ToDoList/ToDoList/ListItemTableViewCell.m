@@ -22,9 +22,6 @@
 
 - (void) layoutSubviews {
     [super layoutSubviews];
-    [self.listItemText setScrollEnabled:NO];
-    [self.listItemText setEditable:NO];
-    [self.listItemText setSelectable:NO];
 }
 
 @end

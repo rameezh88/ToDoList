@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6521AAA71BE947DD00F53088 /* UIPlaceholderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6521AAA61BE947DD00F53088 /* UIPlaceholderTextView.m */; };
+		6521AAAB1BE96EAC00F53088 /* todolist.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 6521AAAA1BE96DD000F53088 /* todolist.sqlite */; };
 		652445AA1BE166D00020A2F5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 652445A91BE166D00020A2F5 /* main.m */; };
 		652445AD1BE166D00020A2F5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 652445AC1BE166D00020A2F5 /* AppDelegate.m */; };
 		652445B51BE166D00020A2F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 652445B41BE166D00020A2F5 /* Assets.xcassets */; };
@@ -22,7 +24,6 @@
 		652445E31BE177DE0020A2F5 /* ToDoListDataService.m in Sources */ = {isa = PBXBuildFile; fileRef = 652445E21BE177DE0020A2F5 /* ToDoListDataService.m */; };
 		652445E51BE179510020A2F5 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 652445E41BE179510020A2F5 /* libsqlite3.tbd */; };
 		6545A4D41BE192D700A4E9DE /* Globals.m in Sources */ = {isa = PBXBuildFile; fileRef = 6545A4D31BE192D700A4E9DE /* Globals.m */; };
-		6545A4D61BE197D300A4E9DE /* todolist.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 652445C41BE16A370020A2F5 /* todolist.sqlite */; };
 		6545A4DA1BE2BF7E00A4E9DE /* ListItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6545A4D81BE2BF7E00A4E9DE /* ListItemTableViewCell.m */; };
 		6545A4DB1BE2BF7E00A4E9DE /* ListItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6545A4D91BE2BF7E00A4E9DE /* ListItemTableViewCell.xib */; };
 		6545A4DE1BE2C3A300A4E9DE /* UIViewController+CommonOperations.m in Sources */ = {isa = PBXBuildFile; fileRef = 6545A4DD1BE2C3A300A4E9DE /* UIViewController+CommonOperations.m */; };
@@ -32,13 +33,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6521AAA51BE947DD00F53088 /* UIPlaceholderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIPlaceholderTextView.h; sourceTree = "<group>"; };
+		6521AAA61BE947DD00F53088 /* UIPlaceholderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIPlaceholderTextView.m; sourceTree = "<group>"; };
+		6521AAAA1BE96DD000F53088 /* todolist.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = todolist.sqlite; sourceTree = "<group>"; };
 		652445A51BE166D00020A2F5 /* ToDoList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		652445A91BE166D00020A2F5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		652445AB1BE166D00020A2F5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		652445AC1BE166D00020A2F5 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		652445B41BE166D00020A2F5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		652445B91BE166D00020A2F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		652445C41BE16A370020A2F5 /* todolist.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = todolist.sqlite; sourceTree = "<group>"; };
 		652445C51BE16A630020A2F5 /* ToDoList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToDoList.h; sourceTree = "<group>"; };
 		652445C61BE16A630020A2F5 /* ToDoList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToDoList.m; sourceTree = "<group>"; };
 		652445C81BE16ACD0020A2F5 /* ToDoListItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToDoListItem.h; sourceTree = "<group>"; };
@@ -142,6 +145,8 @@
 		652445C11BE166F70020A2F5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				6521AAA51BE947DD00F53088 /* UIPlaceholderTextView.h */,
+				6521AAA61BE947DD00F53088 /* UIPlaceholderTextView.m */,
 				652445D31BE16CD90020A2F5 /* XIB */,
 				6545A4D71BE2BF7E00A4E9DE /* ListItemTableViewCell.h */,
 				6545A4D81BE2BF7E00A4E9DE /* ListItemTableViewCell.m */,
@@ -205,7 +210,7 @@
 		6545A4D51BE1974500A4E9DE /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				652445C41BE16A370020A2F5 /* todolist.sqlite */,
+				6521AAAA1BE96DD000F53088 /* todolist.sqlite */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -267,11 +272,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6521AAAB1BE96EAC00F53088 /* todolist.sqlite in Resources */,
 				6545A4DB1BE2BF7E00A4E9DE /* ListItemTableViewCell.xib in Resources */,
 				65870BEE1BE882E500A00453 /* NewListViewController.xib in Resources */,
 				652445B51BE166D00020A2F5 /* Assets.xcassets in Resources */,
 				652445D21BE16CCF0020A2F5 /* HomeViewController.xib in Resources */,
-				6545A4D61BE197D300A4E9DE /* todolist.sqlite in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -287,6 +292,7 @@
 				652445DC1BE16E0F0020A2F5 /* UIAlertView+Blocks.m in Sources */,
 				652445AD1BE166D00020A2F5 /* AppDelegate.m in Sources */,
 				6545A4DA1BE2BF7E00A4E9DE /* ListItemTableViewCell.m in Sources */,
+				6521AAA71BE947DD00F53088 /* UIPlaceholderTextView.m in Sources */,
 				6545A4D41BE192D700A4E9DE /* Globals.m in Sources */,
 				652445CD1BE16B4E0020A2F5 /* ToDoListDatabase.m in Sources */,
 				65870BEC1BE882AF00A00453 /* NewListViewController.m in Sources */,

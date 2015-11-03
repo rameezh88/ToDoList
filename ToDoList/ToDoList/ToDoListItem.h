@@ -9,8 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface ToDoListItem : NSObject
-@property (nonatomic, strong) NSString *itemText;
+@property (nonatomic, strong) NSString *itemText, *itemId, *listId;
 @property (nonatomic, strong) NSDate *created;
-@property NSInteger itemId, listId;
 @property BOOL checked;
 @end

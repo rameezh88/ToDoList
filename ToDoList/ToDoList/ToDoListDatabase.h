@@ -28,6 +28,6 @@
 - (void) insertList: (ToDoList *) list;
 - (void) updateToDoListItem:(ToDoListItem *)listItem;
 - (void) insertToDoListItem: (ToDoListItem *)listItem;
-- (void) deleteListItemWithId: (NSInteger) itemId;
-- (void) deleteToDoListWithId: (NSInteger) itemId;
+- (void) deleteListItemWithId: (NSString *) itemId;
+- (void) deleteToDoListWithId: (NSString *) itemId;
 @end

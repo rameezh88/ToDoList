@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface ListItemTableViewCell : UITableViewCell
-@property (nonatomic, strong) IBOutlet UITextView *listItemText;
+@property (nonatomic, strong) IBOutlet UILabel *listItemText;
 @property (nonatomic, strong) IBOutlet UILabel *lastModified;
 @end

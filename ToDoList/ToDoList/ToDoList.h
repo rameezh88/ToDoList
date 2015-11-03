@@ -9,8 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @interface ToDoList : NSObject
-@property (nonatomic, strong) NSString *listName;
+@property (nonatomic, strong) NSString *listName, *listId;
 @property (nonatomic, strong) NSDate *lastModified;
-@property NSInteger listId;
 - (void) updateDatabase;
+- (void) deleteItem;
 @end

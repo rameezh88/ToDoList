@@ -15,4 +15,8 @@
     [[ToDoListDataService sharedService] updateList:self];
 }
 
+- (void) deleteItem {
+    [[ToDoListDataService sharedService] deleteList:self];
+}
+
 @end

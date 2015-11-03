@@ -12,12 +12,11 @@
 #import "ToDoListDataService.h"
 #import "ListItemTableViewCell.h"
 #import "UIViewController+CommonOperations.h"
-#import "UITextView+VariableHeight.h"
+#import "NewListViewController.h"
 
 @interface HomeViewController () <UITableViewDataSource, UITableViewDelegate, UITextViewDelegate>
 @property (nonatomic, strong) IBOutlet UITableView *toDoListTable;
 @property (nonatomic, strong) NSMutableArray *toDoLists;
-@property (nonatomic, strong) NSMutableArray *listHeights;
 @end
 
 @implementation HomeViewController
@@ -25,33 +24,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.title = @"Home";
+    self.title = @"All lists";
     self.toDoLists = [NSMutableArray new];
     [self.toDoListTable reloadData];
-//    [self addNewItem];
 }
 
-- (void) setDoneButtonOnNavBar {
-    UIBarButtonItem *addList = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStylePlain target:self action:@selector(handleListEditingDone)];
-    self.navigationItem.rightBarButtonItem = addList;
-}
-
-- (void) handleListEditingDone {
-    [self hideKeyboard];
-    [self clearNavBarRightItems];
-    [self refreshTable];
-}
-
-- (void) clearNavBarRightItems {
-    self.navigationItem.rightBarButtonItems = nil;
-}
-
-- (void) addNewItem {
-    ToDoList *list = [ToDoList new];
-    list.listId = [self getUniqueListId];
-    list.listName = [self randomStringWithLength:10];
-    [[ToDoListDataService sharedService] addNewList:list];
-    [self refreshTable];
+- (void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(databaseOperationEnded:)
+                                                 name:kDatabaseOperationEndedNotification
+                                               object:nil];
 }
 
 - (NSInteger) getUniqueListId {
@@ -61,35 +44,13 @@
     return 0;
 }
 
-- (void) updateListHeights {
-    self.listHeights = [NSMutableArray new];
-    for (int i = 0; i < self.toDoLists.count; i++) {
-        [self.listHeights addObject:[NSNumber numberWithDouble:80.0]];
-    }
-    [self.listHeights addObject:[NSNumber numberWithDouble:80.0]];
-}
-
 - (void) refreshTable {
     self.toDoLists = [NSMutableArray arrayWithArray:[[ToDoListDataService sharedService] getAllLists]];
-    [self updateListHeights];
     [self.toDoListTable reloadData];
 }
 
--(NSString *) randomStringWithLength: (int) len {
-    NSString *alphabet  = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXZY0123456789";
-    NSMutableString *s = [NSMutableString stringWithCapacity:20];
-    for (NSUInteger i = 0U; i < 20; i++) {
-        u_int32_t r = arc4random() % [alphabet length];
-        unichar c = [alphabet characterAtIndex:r];
-        [s appendFormat:@"%C", c];
-    }
-    return s;
-}
-
-- (void) viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [self registerForKeyboardNotifications];
-    [self setupViewToHideKeyboard: self.toDoListTable];
+- (void) viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
     [self refreshTable];
 }
 
@@ -109,62 +70,14 @@
     return [dateFormat stringFromDate:date];
 }
 
-#pragma mark - Notifications.
-
-- (void) setupViewToHideKeyboard: (UIView *) view {
-    UITapGestureRecognizer *hideKeyboard = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
-    [hideKeyboard setCancelsTouchesInView:YES];
-    [view addGestureRecognizer:hideKeyboard];
-}
-
-- (void) hideKeyboard {
-    [self.view endEditing:YES];
-}
-
-- (void)keyboardDidShow: (NSNotification *) notification{
-    [self setDoneButtonOnNavBar];
-    NSDictionary* info = [notification userInfo];
-    CGSize keyboardSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-    [self updateContentScrollViewSize: keyboardSize];
-//    CGPoint bottomOffset = CGPointMake(0, keyboardSize.height);
-//    [self.toDoListTable setContentOffset:bottomOffset animated:YES];
-}
-
-- (void)keyboardWillHide: (NSNotification *) notification{
-    [self setDefaultScrollViewContentSize];
-}
-
-- (void) updateContentScrollViewSize: (CGSize) keyboardSize {
-    [self.toDoListTable setContentSize:[self getContentScrollViewSizeToBeSet:keyboardSize]];
-}
-
-- (void) updateContentScrollViewSize {
-    [self setDefaultScrollViewContentSize];
-}
-
-- (void) setDefaultScrollViewContentSize {
-    CGSize defaultSize = [self getTableContentSize];
-    [self.toDoListTable setContentSize:defaultSize];
-    CGPoint bottomOffset = CGPointMake(0, 0);
-    [self.toDoListTable setContentOffset:bottomOffset animated:NO];
-}
-
-- (CGSize) getContentScrollViewSizeToBeSet: (CGSize) keyboardSize {
-    CGSize targetSize = [self getTableContentSize];
-    targetSize.height += keyboardSize.height;
-    return targetSize;
-}
-
-- (CGSize) getTableContentSize {
-    CGSize tableContentSize = self.toDoListTable.contentSize;
-    tableContentSize.height = 80 * [self.toDoListTable numberOfRowsInSection:0];
-    return tableContentSize;
+- (void)databaseOperationEnded: (NSNotification *) notification {
+    [self refreshTable];
 }
 
 #pragma mark - UITableViewDelegate methods.
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return [self.listHeights[indexPath.row] doubleValue];
+    return 80;
 }
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
@@ -172,7 +85,7 @@
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.listHeights.count;
+    return self.toDoLists.count + 1;
 }
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -187,7 +100,6 @@
     if (self.toDoLists.count == 0 || indexPath.row == self.toDoLists.count) {
         cell.listItemText.attributedText = [[NSAttributedString alloc] initWithString:@"+   Add a new list" attributes:@{NSForegroundColorAttributeName: [UIColor lightGrayColor], NSFontAttributeName: [UIFont systemFontOfSize:17.0]}];
         cell.listItemText.tag = indexPath.row;
-        cell.listItemText.delegate = self;
         [cell.lastModified setHidden:YES];
         return cell;
     }
@@ -196,13 +108,10 @@
         [cell.lastModified setHidden:NO];
         ToDoList *list = self.toDoLists[indexPath.row];
         cell.listItemText.text = list.listName;
-        [cell.listItemText updateHeight];
         cell.listItemText.tag = indexPath.row;
-        cell.listItemText.delegate = self;
         cell.lastModified.text = [self stringFromDate:list.lastModified];
     }
     @catch (NSException *exception) {
-        
     }
     @finally {
         
@@ -210,60 +119,21 @@
     return cell;
 }
 
-- (void) tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    ListItemTableViewCell *myCell = (ListItemTableViewCell *) cell;
-    myCell.listItemText.delegate = nil;
-}
-
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    NewListViewController *nlvc = [[NewListViewController alloc] initWithNibName:@"NewListViewController" bundle:nil];
+    if (indexPath.row < self.toDoLists.count) {
+        nlvc.toDoList = self.toDoLists[indexPath.row];
+    } else {
+        ToDoList *list = [ToDoList new];
+        list.listName = @"";
+        nlvc.toDoList = list;
+        [[ToDoListDataService sharedService] addNewList:list];
+    }
+    [self.navigationController pushViewController:nlvc animated:YES];
 }
 
 //- (NSString *) tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
 //    return @"Delete";
 //}
-
-//#pragma mark - UITextViewDelegate methods
-//
-//- (void)textViewDidBeginEditing:(UITextView *)textView{
-//    textView.attributedText = nil;
-//    textView.text = @" ";
-//    [textView setFont:[UIFont systemFontOfSize:17]];
-//    [textView setTextColor:[UIColor blackColor]];
-//}
-//
-//- (void)textViewDidChange:(UITextView *)textView
-//{
-//    @try {
-//        ToDoList *list = self.toDoLists[textView.tag];
-//        list.listName = textView.text;
-//        self.listHeights[textView.tag] = [NSNumber numberWithDouble:[textView updateHeight]+ 30.0];
-//    }
-//    @catch (NSException *exception) {
-//        
-//    }
-//    @finally {
-//        
-//    }
-//}
-//
-//- (void) textViewDidEndEditing:(UITextView *)textView {
-//    @try {
-//        if (textView.tag == self.listHeights.count - 1) {
-//            ToDoList *list = [ToDoList new];
-//            list.listId = [self getUniqueListId];
-//            list.listName = textView.text;
-//            [[ToDoListDataService sharedService] addNewList:list];
-//            return;
-//        }
-//        
-//        ToDoList *list = self.toDoLists[textView.tag];
-//        [list updateDatabase];
-//    }
-//    @catch (NSException *exception) {
-//    }
-//    @finally {
-//    }
-//}
-//
 @end

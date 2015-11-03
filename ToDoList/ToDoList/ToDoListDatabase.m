@@ -76,7 +76,7 @@ static NSString * syncronized_object = @"Syncronized";
 
 - (void) insertToDoListItem: (ToDoListItem *)listItem {
     @synchronized (kDatabaseOperation) {
-        NSString *sql = [NSString stringWithFormat:@"INSERT OR REPLACE INTO %s (id,todo_list_id,text,checked,created) VALUES (%ld, %ld, '%@', %ld, '%@')", [kToDoListItemsTable UTF8String], (long)listItem.itemId, (long)listItem.listId, listItem.itemText, (long)listItem.checked, [self stringFromDate:[NSDate new]]];
+        NSString *sql = [NSString stringWithFormat:@"INSERT OR REPLACE INTO %s (id,todo_list_id,text,checked,created) VALUES ('%@', '%@', '%@', %ld, '%@')", [kToDoListItemsTable UTF8String], listItem.itemId, listItem.listId, listItem.itemText, (long)listItem.checked, [self stringFromDate:[NSDate new]]];
         sqlite3_stmt * insertStatement;
         int retVal = sqlite3_prepare_v2(_sqlite3db, [sql UTF8String], -1, &insertStatement, NULL);
         if (retVal == SQLITE_OK) {
@@ -103,7 +103,7 @@ static NSString * syncronized_object = @"Syncronized";
 
 - (void) insertList: (ToDoList *) list {
     @synchronized (kDatabaseOperation) {
-        NSString *sql = [NSString stringWithFormat:@"INSERT OR REPLACE INTO %s (id,list_name,modified) VALUES (%ld,'%@','%@')", [kToDoListTable UTF8String], (long)list.listId, list.listName, [self stringFromDate:[NSDate new]]];
+        NSString *sql = [NSString stringWithFormat:@"INSERT OR REPLACE INTO %s (id,list_name,modified) VALUES ('%@','%@','%@')", [kToDoListTable UTF8String], list.listId, list.listName, [self stringFromDate:[NSDate new]]];
         sqlite3_stmt * insertStatement;
         int retVal = sqlite3_prepare_v2(_sqlite3db, [sql UTF8String], -1, &insertStatement, NULL);
         if (retVal == SQLITE_OK) {
@@ -135,20 +135,21 @@ static NSString * syncronized_object = @"Syncronized";
         sqlite3_stmt * selectStatement;
         int retVal = sqlite3_prepare_v2(_sqlite3db, [sql UTF8String], -1, &selectStatement, NULL);
         if (retVal == SQLITE_OK) {
-            NSUInteger listId;
+            char *listId;
             char *nameStr;
-            NSString *name;
+            NSString *name, *listIdStr;
             NSDate *modified;
             arr = [[NSMutableArray alloc] initWithCapacity:8];
             ToDoList *list;
             while (sqlite3_step(selectStatement) == SQLITE_ROW) {
-                listId = sqlite3_column_int(selectStatement, 0);
+                listId = (char *)sqlite3_column_text(selectStatement, 0);
                 nameStr = (char *)sqlite3_column_text(selectStatement, 1);
                 char *dateTime = (char *)sqlite3_column_text(selectStatement, 2);
                 modified = [self dateFromString:dateTime];
                 name = [NSString stringWithCString:nameStr encoding:NSUTF8StringEncoding];
+                listIdStr = [NSString stringWithCString:listId encoding:NSUTF8StringEncoding];
                 list = [ToDoList new];
-                list.listId = listId;
+                list.listId = listIdStr;
                 list.listName = name;
                 list.lastModified = modified;
                 [arr addObject:list];
@@ -173,21 +174,23 @@ static NSString * syncronized_object = @"Syncronized";
         sqlite3_stmt * selectStatement;
         int retVal = sqlite3_prepare_v2(_sqlite3db, [sql UTF8String], -1, &selectStatement, NULL);
         if (retVal == SQLITE_OK) {
-            NSUInteger listId, listItemId;
+            char *listId, *listItemId;
             BOOL checked;
             char *text, *created;
             arr = [[NSMutableArray alloc] initWithCapacity:8];
             ToDoListItem *listItem;
             while (sqlite3_step(selectStatement) == SQLITE_ROW) {
-                listItemId = sqlite3_column_int(selectStatement, 0);
-                listId = sqlite3_column_int(selectStatement, 1);
+                listItemId = (char *)sqlite3_column_text(selectStatement, 0);
+                listId = (char *)sqlite3_column_text(selectStatement, 1);
                 text = (char *)sqlite3_column_text(selectStatement, 2);
                 checked = sqlite3_column_int(selectStatement, 3);
                 created = (char *)sqlite3_column_text(selectStatement, 4);
                 NSDate *itemCreated = [self dateFromString:created];
                 NSString *textStr = [NSString stringWithCString:text encoding:NSUTF8StringEncoding];
-                listItem.itemId = listItemId;
-                listItem.listId = listId;
+                NSString *listItemIdStr = [NSString stringWithCString:listItemId encoding:NSUTF8StringEncoding];
+                NSString *listIdStr = [NSString stringWithCString:listId encoding:NSUTF8StringEncoding];
+                listItem.itemId = listItemIdStr;
+                listItem.listId = listIdStr;
                 listItem.itemText = textStr;
                 listItem.checked = checked;
                 listItem.created = itemCreated;
@@ -202,17 +205,17 @@ static NSString * syncronized_object = @"Syncronized";
     }
 }
 
-- (void) deleteListItemWithId: (NSInteger) itemId {
+- (void) deleteListItemWithId: (NSString *) itemId {
     [self deleteItemWithId:itemId fromTable:kToDoListItemsTable primaryKey:@"id"];
 }
 
-- (void) deleteToDoListWithId: (NSInteger) itemId {
+- (void) deleteToDoListWithId: (NSString *) itemId {
     [self deleteItemWithId:itemId fromTable:kToDoListTable primaryKey:@"id"];
 }
 
-- (BOOL) deleteItemWithId:(NSInteger)itemId fromTable:(NSString*)tableName primaryKey:(NSString*)primaryKey
+- (BOOL) deleteItemWithId:(NSString *)itemId fromTable:(NSString*)tableName primaryKey:(NSString*)primaryKey
 {
-    NSMutableString * sql = [NSMutableString stringWithFormat:@"DELETE FROM '%s' WHERE %s='%ld'",[tableName UTF8String],[primaryKey UTF8String], (long)itemId];
+    NSMutableString * sql = [NSMutableString stringWithFormat:@"DELETE FROM '%s' WHERE %s='%s'",[tableName UTF8String],[primaryKey UTF8String], [itemId UTF8String]];
     return (BOOL)[self execute:sql];
 }
 
