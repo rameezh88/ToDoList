@@ -10,6 +10,7 @@
 #import "ListItemTableViewCell.h"
 #import "ToDoList.h"
 #import "ToDoListDataService.h"
+#import "NSString+Utils.h"
 
 @interface NewListViewController () <UITableViewDataSource, UITabBarDelegate, UITextViewDelegate>
 @property (nonatomic, strong) IBOutlet UIView *listTitleView;
@@ -36,10 +37,10 @@
 }
 
 - (void) saveListChanges {
-    self.toDoList.listName = self.titleTextView.text;
-    if ([self.toDoList.listName isEqualToString:@""] && [self.titleTextView.text isEqualToString:@""]) {
+    if ([self.toDoList.listName isEmpty] && [self.titleTextView.text isEmpty]) {
         [self.toDoList deleteItem];
-    } else {
+    } else if (![self.titleTextView.text isEmpty]) {
+        self.toDoList.listName = self.titleTextView.text;
         [self.toDoList updateDatabase];
     }
 }
@@ -144,7 +145,7 @@
 }
 
 - (void) tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    ListItemTableViewCell *myCell = (ListItemTableViewCell *) cell;
+//    ListItemTableViewCell *myCell = (ListItemTableViewCell *) cell;
 //    myCell.listItemText.delegate = nil;
 }
 
@@ -155,16 +156,16 @@
 #pragma mark - UITextViewDelegate methods
 
 - (void)textViewDidBeginEditing:(UITextView *)textView{
-    textView.attributedText = nil;
-    textView.text = @" ";
-    [textView setFont:[UIFont systemFontOfSize:17]];
-    [textView setTextColor:[UIColor blackColor]];
+//    textView.attributedText = nil;
+//    textView.text = @" ";
+//    [textView setFont:[UIFont systemFontOfSize:17]];
+//    [textView setTextColor:[UIColor blackColor]];
 }
 
 - (BOOL) textViewShouldEndEditing:(UITextView *)textView {
-    if ([textView isEqual:self.titleTextView]) {
-        [self saveListChanges];
-    }
+//    if ([textView isEqual:self.titleTextView]) {
+//        [self saveListChanges];
+//    }
     return YES;
 }
 
@@ -184,9 +185,9 @@
 }
 
 - (void) textViewDidEndEditing:(UITextView *)textView {
-    if ([textView isEqual:self.titleTextView]) {
-        [self saveListChanges];
-    }
+//    if ([textView isEqual:self.titleTextView]) {
+//        [self saveListChanges];
+//    }
 //    @try {
 //        if (textView.tag == self.listHeights.count - 1) {
 //            ToDoList *list = [ToDoList new];

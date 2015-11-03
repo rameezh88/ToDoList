@@ -76,7 +76,7 @@ static NSString * syncronized_object = @"Syncronized";
 
 - (void) insertToDoListItem: (ToDoListItem *)listItem {
     @synchronized (kDatabaseOperation) {
-        NSString *sql = [NSString stringWithFormat:@"INSERT OR REPLACE INTO %s (id,todo_list_id,text,checked,created) VALUES ('%@', '%@', '%@', %ld, '%@')", [kToDoListItemsTable UTF8String], listItem.itemId, listItem.listId, listItem.itemText, (long)listItem.checked, [self stringFromDate:[NSDate new]]];
+        NSString *sql = [NSString stringWithFormat:@"INSERT OR REPLACE INTO %s (id,todo_list_id,text,checked,created) VALUES ('%s', '%s', '%s', %ld, '%s')", [kToDoListItemsTable UTF8String], [listItem.itemId UTF8String], [listItem.listId UTF8String], [listItem.itemText UTF8String], (long)listItem.checked, [[self stringFromDate:[NSDate new]] UTF8String]];
         sqlite3_stmt * insertStatement;
         int retVal = sqlite3_prepare_v2(_sqlite3db, [sql UTF8String], -1, &insertStatement, NULL);
         if (retVal == SQLITE_OK) {
@@ -103,7 +103,7 @@ static NSString * syncronized_object = @"Syncronized";
 
 - (void) insertList: (ToDoList *) list {
     @synchronized (kDatabaseOperation) {
-        NSString *sql = [NSString stringWithFormat:@"INSERT OR REPLACE INTO %s (id,list_name,modified) VALUES ('%@','%@','%@')", [kToDoListTable UTF8String], list.listId, list.listName, [self stringFromDate:[NSDate new]]];
+        NSString *sql = [NSString stringWithFormat:@"INSERT OR REPLACE INTO %s (id,list_name,modified) VALUES ('%s','%s','%s')", [kToDoListTable UTF8String], [list.listId UTF8String], [list.listName UTF8String], [[self stringFromDate:[NSDate new]] UTF8String]];
         sqlite3_stmt * insertStatement;
         int retVal = sqlite3_prepare_v2(_sqlite3db, [sql UTF8String], -1, &insertStatement, NULL);
         if (retVal == SQLITE_OK) {

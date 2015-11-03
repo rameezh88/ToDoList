@@ -13,6 +13,7 @@
 #import "ListItemTableViewCell.h"
 #import "UIViewController+CommonOperations.h"
 #import "NewListViewController.h"
+#import "NSMutableArray+Reverse.h"
 
 @interface HomeViewController () <UITableViewDataSource, UITableViewDelegate, UITextViewDelegate>
 @property (nonatomic, strong) IBOutlet UITableView *toDoListTable;
@@ -27,6 +28,25 @@
     self.title = @"All lists";
     self.toDoLists = [NSMutableArray new];
     [self.toDoListTable reloadData];
+    [self setupAddNewListButton];
+}
+
+- (void) setupAddNewListButton {
+    UIBarButtonItem *addNewListItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewList)];
+    self.navigationItem.rightBarButtonItem = addNewListItem;
+}
+
+- (void) addNewList {
+    ToDoList *list = [ToDoList new];
+    list.listName = @"";
+    [[ToDoListDataService sharedService] addNewList:list];
+    [self openNewListControllerForList:list];
+}
+
+- (void) openNewListControllerForList: (ToDoList *) list {
+    NewListViewController *nlvc = [[NewListViewController alloc] initWithNibName:@"NewListViewController" bundle:nil];
+    nlvc.toDoList = list;
+    [self.navigationController pushViewController:nlvc animated:YES];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -37,15 +57,9 @@
                                                object:nil];
 }
 
-- (NSInteger) getUniqueListId {
-    if (self.toDoLists.count > 0) {
-        return self.toDoLists.count+1;
-    }
-    return 0;
-}
-
 - (void) refreshTable {
     self.toDoLists = [NSMutableArray arrayWithArray:[[ToDoListDataService sharedService] getAllLists]];
+    [self.toDoLists reverse];
     [self.toDoListTable reloadData];
 }
 
@@ -85,7 +99,7 @@
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.toDoLists.count + 1;
+    return self.toDoLists.count;
 }
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -97,13 +111,6 @@
         cell = [nib objectAtIndex:0];
     }
 
-    if (self.toDoLists.count == 0 || indexPath.row == self.toDoLists.count) {
-        cell.listItemText.attributedText = [[NSAttributedString alloc] initWithString:@"+   Add a new list" attributes:@{NSForegroundColorAttributeName: [UIColor lightGrayColor], NSFontAttributeName: [UIFont systemFontOfSize:17.0]}];
-        cell.listItemText.tag = indexPath.row;
-        [cell.lastModified setHidden:YES];
-        return cell;
-    }
-    
     @try {
         [cell.lastModified setHidden:NO];
         ToDoList *list = self.toDoLists[indexPath.row];
@@ -122,14 +129,7 @@
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     NewListViewController *nlvc = [[NewListViewController alloc] initWithNibName:@"NewListViewController" bundle:nil];
-    if (indexPath.row < self.toDoLists.count) {
-        nlvc.toDoList = self.toDoLists[indexPath.row];
-    } else {
-        ToDoList *list = [ToDoList new];
-        list.listName = @"";
-        nlvc.toDoList = list;
-        [[ToDoListDataService sharedService] addNewList:list];
-    }
+    nlvc.toDoList = self.toDoLists[indexPath.row];
     [self.navigationController pushViewController:nlvc animated:YES];
 }
 

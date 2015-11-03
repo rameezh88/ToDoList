@@ -34,9 +34,6 @@ CGFloat const UI_PLACEHOLDER_TEXT_CHANGED_ANIMATION_DURATION = 0.25;
 - (void)awakeFromNib
 {
     [super awakeFromNib];
-    
-    // Use Interface Builder User Defined Runtime Attributes to set
-    // placeholder and placeholderColor in Interface Builder.
     if (!self.placeholder) {
         [self setPlaceholder:@""];
     }

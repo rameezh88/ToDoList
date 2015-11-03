@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		6521AAA71BE947DD00F53088 /* UIPlaceholderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6521AAA61BE947DD00F53088 /* UIPlaceholderTextView.m */; };
 		6521AAAB1BE96EAC00F53088 /* todolist.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 6521AAAA1BE96DD000F53088 /* todolist.sqlite */; };
+		6521AAAE1BE979D400F53088 /* NSString+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 6521AAAD1BE979D400F53088 /* NSString+Utils.m */; };
+		6521AAB11BE97D8200F53088 /* NSMutableArray+Reverse.m in Sources */ = {isa = PBXBuildFile; fileRef = 6521AAB01BE97D8200F53088 /* NSMutableArray+Reverse.m */; };
 		652445AA1BE166D00020A2F5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 652445A91BE166D00020A2F5 /* main.m */; };
 		652445AD1BE166D00020A2F5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 652445AC1BE166D00020A2F5 /* AppDelegate.m */; };
 		652445B51BE166D00020A2F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 652445B41BE166D00020A2F5 /* Assets.xcassets */; };
@@ -36,6 +38,10 @@
 		6521AAA51BE947DD00F53088 /* UIPlaceholderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIPlaceholderTextView.h; sourceTree = "<group>"; };
 		6521AAA61BE947DD00F53088 /* UIPlaceholderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIPlaceholderTextView.m; sourceTree = "<group>"; };
 		6521AAAA1BE96DD000F53088 /* todolist.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = todolist.sqlite; sourceTree = "<group>"; };
+		6521AAAC1BE979D400F53088 /* NSString+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Utils.h"; sourceTree = "<group>"; };
+		6521AAAD1BE979D400F53088 /* NSString+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Utils.m"; sourceTree = "<group>"; };
+		6521AAAF1BE97D8200F53088 /* NSMutableArray+Reverse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+Reverse.h"; sourceTree = "<group>"; };
+		6521AAB01BE97D8200F53088 /* NSMutableArray+Reverse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+Reverse.m"; sourceTree = "<group>"; };
 		652445A51BE166D00020A2F5 /* ToDoList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		652445A91BE166D00020A2F5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		652445AB1BE166D00020A2F5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -191,6 +197,8 @@
 		652445D71BE16DCC0020A2F5 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				6521AAAF1BE97D8200F53088 /* NSMutableArray+Reverse.h */,
+				6521AAB01BE97D8200F53088 /* NSMutableArray+Reverse.m */,
 				6545A4DC1BE2C3A300A4E9DE /* UIViewController+CommonOperations.h */,
 				6545A4DD1BE2C3A300A4E9DE /* UIViewController+CommonOperations.m */,
 				6545A4D21BE192D700A4E9DE /* Globals.h */,
@@ -203,6 +211,8 @@
 				652445DB1BE16E0F0020A2F5 /* UIColor+Hex.m */,
 				6545A4DF1BE2D86700A4E9DE /* UITextView+VariableHeight.h */,
 				6545A4E01BE2D86700A4E9DE /* UITextView+VariableHeight.m */,
+				6521AAAC1BE979D400F53088 /* NSString+Utils.h */,
+				6521AAAD1BE979D400F53088 /* NSString+Utils.m */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -292,6 +302,7 @@
 				652445DC1BE16E0F0020A2F5 /* UIAlertView+Blocks.m in Sources */,
 				652445AD1BE166D00020A2F5 /* AppDelegate.m in Sources */,
 				6545A4DA1BE2BF7E00A4E9DE /* ListItemTableViewCell.m in Sources */,
+				6521AAB11BE97D8200F53088 /* NSMutableArray+Reverse.m in Sources */,
 				6521AAA71BE947DD00F53088 /* UIPlaceholderTextView.m in Sources */,
 				6545A4D41BE192D700A4E9DE /* Globals.m in Sources */,
 				652445CD1BE16B4E0020A2F5 /* ToDoListDatabase.m in Sources */,
@@ -300,6 +311,7 @@
 				652445E31BE177DE0020A2F5 /* ToDoListDataService.m in Sources */,
 				652445CA1BE16ACD0020A2F5 /* ToDoListItem.m in Sources */,
 				6545A4E11BE2D86700A4E9DE /* UITextView+VariableHeight.m in Sources */,
+				6521AAAE1BE979D400F53088 /* NSString+Utils.m in Sources */,
 				652445D61BE16D470020A2F5 /* RootNavViewController.m in Sources */,
 				6545A4DE1BE2C3A300A4E9DE /* UIViewController+CommonOperations.m in Sources */,
 				652445AA1BE166D00020A2F5 /* main.m in Sources */,
