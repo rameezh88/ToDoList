@@ -27,6 +27,8 @@
 		6545A4DB1BE2BF7E00A4E9DE /* ListItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6545A4D91BE2BF7E00A4E9DE /* ListItemTableViewCell.xib */; };
 		6545A4DE1BE2C3A300A4E9DE /* UIViewController+CommonOperations.m in Sources */ = {isa = PBXBuildFile; fileRef = 6545A4DD1BE2C3A300A4E9DE /* UIViewController+CommonOperations.m */; };
 		6545A4E11BE2D86700A4E9DE /* UITextView+VariableHeight.m in Sources */ = {isa = PBXBuildFile; fileRef = 6545A4E01BE2D86700A4E9DE /* UITextView+VariableHeight.m */; };
+		65870BEC1BE882AF00A00453 /* NewListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65870BEB1BE882AF00A00453 /* NewListViewController.m */; };
+		65870BEE1BE882E500A00453 /* NewListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65870BED1BE882E500A00453 /* NewListViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +68,9 @@
 		6545A4DD1BE2C3A300A4E9DE /* UIViewController+CommonOperations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+CommonOperations.m"; sourceTree = "<group>"; };
 		6545A4DF1BE2D86700A4E9DE /* UITextView+VariableHeight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+VariableHeight.h"; sourceTree = "<group>"; };
 		6545A4E01BE2D86700A4E9DE /* UITextView+VariableHeight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+VariableHeight.m"; sourceTree = "<group>"; };
+		65870BEA1BE882AF00A00453 /* NewListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewListViewController.h; sourceTree = "<group>"; };
+		65870BEB1BE882AF00A00453 /* NewListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewListViewController.m; sourceTree = "<group>"; };
+		65870BED1BE882E500A00453 /* NewListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewListViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +156,8 @@
 				652445CF1BE16CCF0020A2F5 /* HomeViewController.m */,
 				652445D41BE16D470020A2F5 /* RootNavViewController.h */,
 				652445D51BE16D470020A2F5 /* RootNavViewController.m */,
+				65870BEA1BE882AF00A00453 /* NewListViewController.h */,
+				65870BEB1BE882AF00A00453 /* NewListViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -171,6 +178,7 @@
 			children = (
 				6545A4D91BE2BF7E00A4E9DE /* ListItemTableViewCell.xib */,
 				652445D01BE16CCF0020A2F5 /* HomeViewController.xib */,
+				65870BED1BE882E500A00453 /* NewListViewController.xib */,
 			);
 			name = XIB;
 			sourceTree = "<group>";
@@ -260,6 +268,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6545A4DB1BE2BF7E00A4E9DE /* ListItemTableViewCell.xib in Resources */,
+				65870BEE1BE882E500A00453 /* NewListViewController.xib in Resources */,
 				652445B51BE166D00020A2F5 /* Assets.xcassets in Resources */,
 				652445D21BE16CCF0020A2F5 /* HomeViewController.xib in Resources */,
 				6545A4D61BE197D300A4E9DE /* todolist.sqlite in Resources */,
@@ -280,6 +289,7 @@
 				6545A4DA1BE2BF7E00A4E9DE /* ListItemTableViewCell.m in Sources */,
 				6545A4D41BE192D700A4E9DE /* Globals.m in Sources */,
 				652445CD1BE16B4E0020A2F5 /* ToDoListDatabase.m in Sources */,
+				65870BEC1BE882AF00A00453 /* NewListViewController.m in Sources */,
 				652445DD1BE16E0F0020A2F5 /* UIColor+Hex.m in Sources */,
 				652445E31BE177DE0020A2F5 /* ToDoListDataService.m in Sources */,
 				652445CA1BE16ACD0020A2F5 /* ToDoListItem.m in Sources */,

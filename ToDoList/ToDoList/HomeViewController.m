@@ -54,6 +54,13 @@
     [self refreshTable];
 }
 
+- (NSInteger) getUniqueListId {
+    if (self.toDoLists.count > 0) {
+        return self.toDoLists.count+1;
+    }
+    return 0;
+}
+
 - (void) updateListHeights {
     self.listHeights = [NSMutableArray new];
     for (int i = 0; i < self.toDoLists.count; i++) {
@@ -178,7 +185,7 @@
     }
 
     if (self.toDoLists.count == 0 || indexPath.row == self.toDoLists.count) {
-        cell.listItemText.attributedText = [[NSAttributedString alloc] initWithString:@"Add a new item" attributes:@{NSForegroundColorAttributeName: [UIColor lightGrayColor]}];
+        cell.listItemText.attributedText = [[NSAttributedString alloc] initWithString:@"+   Add a new list" attributes:@{NSForegroundColorAttributeName: [UIColor lightGrayColor], NSFontAttributeName: [UIFont systemFontOfSize:17.0]}];
         cell.listItemText.tag = indexPath.row;
         cell.listItemText.delegate = self;
         [cell.lastModified setHidden:YES];
@@ -200,7 +207,6 @@
     @finally {
         
     }
-    
     return cell;
 }
 
@@ -213,54 +219,51 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
-#pragma mark - UITextViewDelegate methods
+//- (NSString *) tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
+//    return @"Delete";
+//}
 
-- (void)textViewDidBeginEditing:(UITextView *)textView{
-    textView.attributedText = nil;
-    textView.text = @" ";
-    [textView setFont:[UIFont systemFontOfSize:17]];
-    [textView setTextColor:[UIColor blackColor]];
-}
-
-- (void)textViewDidChange:(UITextView *)textView
-{
-    @try {
-        ToDoList *list = self.toDoLists[textView.tag];
-        list.listName = textView.text;
-        self.listHeights[textView.tag] = [NSNumber numberWithDouble:[textView updateHeight]+ 30.0];
-    }
-    @catch (NSException *exception) {
-        
-    }
-    @finally {
-        
-    }
-}
-
-- (void) textViewDidEndEditing:(UITextView *)textView {
-    @try {
-        if (textView.tag == self.listHeights.count - 1) {
-            ToDoList *list = [ToDoList new];
-            list.listId = [self getUniqueListId];
-            list.listName = textView.text;
-            [[ToDoListDataService sharedService] addNewList:list];
-            return;
-        }
-        
-        ToDoList *list = self.toDoLists[textView.tag];
-        [list updateDatabase];
-    }
-    @catch (NSException *exception) {
-    }
-    @finally {
-    }
-}
-
-- (NSInteger) getUniqueListId {
-    if (self.toDoLists.count > 0) {
-        return self.toDoLists.count+1;
-    }
-    return 0;
-}
-
+//#pragma mark - UITextViewDelegate methods
+//
+//- (void)textViewDidBeginEditing:(UITextView *)textView{
+//    textView.attributedText = nil;
+//    textView.text = @" ";
+//    [textView setFont:[UIFont systemFontOfSize:17]];
+//    [textView setTextColor:[UIColor blackColor]];
+//}
+//
+//- (void)textViewDidChange:(UITextView *)textView
+//{
+//    @try {
+//        ToDoList *list = self.toDoLists[textView.tag];
+//        list.listName = textView.text;
+//        self.listHeights[textView.tag] = [NSNumber numberWithDouble:[textView updateHeight]+ 30.0];
+//    }
+//    @catch (NSException *exception) {
+//        
+//    }
+//    @finally {
+//        
+//    }
+//}
+//
+//- (void) textViewDidEndEditing:(UITextView *)textView {
+//    @try {
+//        if (textView.tag == self.listHeights.count - 1) {
+//            ToDoList *list = [ToDoList new];
+//            list.listId = [self getUniqueListId];
+//            list.listName = textView.text;
+//            [[ToDoListDataService sharedService] addNewList:list];
+//            return;
+//        }
+//        
+//        ToDoList *list = self.toDoLists[textView.tag];
+//        [list updateDatabase];
+//    }
+//    @catch (NSException *exception) {
+//    }
+//    @finally {
+//    }
+//}
+//
 @end
