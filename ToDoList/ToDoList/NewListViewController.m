@@ -17,6 +17,7 @@
 @property (nonatomic, strong) IBOutlet UITableView *toDoListTable;
 @property (nonatomic, strong) IBOutlet UITextView *titleTextView;
 @property (nonatomic, strong) NSMutableArray *listHeights, *toDoListItems;
+@property BOOL listEdited;
 @end
 
 @implementation NewListViewController
@@ -29,6 +30,8 @@
     if (self.toDoList && ![self.toDoList.listName isEqualToString:@""]) {
         [self.titleTextView setText: self.toDoList.listName];
     }
+    
+    self.listEdited = NO;
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -39,7 +42,7 @@
 - (void) saveListChanges {
     if ([self.toDoList.listName isEmpty] && [self.titleTextView.text isEmpty]) {
         [self.toDoList deleteItem];
-    } else if (![self.titleTextView.text isEmpty]) {
+    } else if (![self.titleTextView.text isEmpty] && self.listEdited) {
         self.toDoList.listName = self.titleTextView.text;
         [self.toDoList updateDatabase];
     }
@@ -171,6 +174,7 @@
 
 - (void)textViewDidChange:(UITextView *)textView
 {
+    self.listEdited = YES;
 //    @try {
 //        ToDoList *list = self.toDoLists[textView.tag];
 //        list.listName = textView.text;
