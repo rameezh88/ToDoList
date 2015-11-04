@@ -11,6 +11,10 @@
 		6521AAAB1BE96EAC00F53088 /* todolist.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 6521AAAA1BE96DD000F53088 /* todolist.sqlite */; };
 		6521AAAE1BE979D400F53088 /* NSString+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 6521AAAD1BE979D400F53088 /* NSString+Utils.m */; };
 		6521AAB11BE97D8200F53088 /* NSMutableArray+Reverse.m in Sources */ = {isa = PBXBuildFile; fileRef = 6521AAB01BE97D8200F53088 /* NSMutableArray+Reverse.m */; };
+		6521AAB71BE98F2D00F53088 /* ToDoListItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6521AAB61BE98F2D00F53088 /* ToDoListItemTableViewCell.m */; };
+		6521AAB91BE98FD200F53088 /* ToDoListItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6521AAB81BE98FD200F53088 /* ToDoListItemTableViewCell.xib */; };
+		6521AABD1BE992CE00F53088 /* NewListItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6521AABB1BE992CE00F53088 /* NewListItemViewController.m */; };
+		6521AABE1BE992CE00F53088 /* NewListItemViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6521AABC1BE992CE00F53088 /* NewListItemViewController.xib */; };
 		652445AA1BE166D00020A2F5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 652445A91BE166D00020A2F5 /* main.m */; };
 		652445AD1BE166D00020A2F5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 652445AC1BE166D00020A2F5 /* AppDelegate.m */; };
 		652445B51BE166D00020A2F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 652445B41BE166D00020A2F5 /* Assets.xcassets */; };
@@ -42,6 +46,12 @@
 		6521AAAD1BE979D400F53088 /* NSString+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Utils.m"; sourceTree = "<group>"; };
 		6521AAAF1BE97D8200F53088 /* NSMutableArray+Reverse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+Reverse.h"; sourceTree = "<group>"; };
 		6521AAB01BE97D8200F53088 /* NSMutableArray+Reverse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+Reverse.m"; sourceTree = "<group>"; };
+		6521AAB51BE98F2D00F53088 /* ToDoListItemTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToDoListItemTableViewCell.h; sourceTree = "<group>"; };
+		6521AAB61BE98F2D00F53088 /* ToDoListItemTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToDoListItemTableViewCell.m; sourceTree = "<group>"; };
+		6521AAB81BE98FD200F53088 /* ToDoListItemTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ToDoListItemTableViewCell.xib; sourceTree = "<group>"; };
+		6521AABA1BE992CE00F53088 /* NewListItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewListItemViewController.h; sourceTree = "<group>"; };
+		6521AABB1BE992CE00F53088 /* NewListItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewListItemViewController.m; sourceTree = "<group>"; };
+		6521AABC1BE992CE00F53088 /* NewListItemViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewListItemViewController.xib; sourceTree = "<group>"; };
 		652445A51BE166D00020A2F5 /* ToDoList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		652445A91BE166D00020A2F5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		652445AB1BE166D00020A2F5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -156,6 +166,8 @@
 				652445D31BE16CD90020A2F5 /* XIB */,
 				6545A4D71BE2BF7E00A4E9DE /* ListItemTableViewCell.h */,
 				6545A4D81BE2BF7E00A4E9DE /* ListItemTableViewCell.m */,
+				6521AAB51BE98F2D00F53088 /* ToDoListItemTableViewCell.h */,
+				6521AAB61BE98F2D00F53088 /* ToDoListItemTableViewCell.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -169,6 +181,8 @@
 				652445D51BE16D470020A2F5 /* RootNavViewController.m */,
 				65870BEA1BE882AF00A00453 /* NewListViewController.h */,
 				65870BEB1BE882AF00A00453 /* NewListViewController.m */,
+				6521AABA1BE992CE00F53088 /* NewListItemViewController.h */,
+				6521AABB1BE992CE00F53088 /* NewListItemViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -187,9 +201,11 @@
 		652445D31BE16CD90020A2F5 /* XIB */ = {
 			isa = PBXGroup;
 			children = (
+				6521AABC1BE992CE00F53088 /* NewListItemViewController.xib */,
 				6545A4D91BE2BF7E00A4E9DE /* ListItemTableViewCell.xib */,
 				652445D01BE16CCF0020A2F5 /* HomeViewController.xib */,
 				65870BED1BE882E500A00453 /* NewListViewController.xib */,
+				6521AAB81BE98FD200F53088 /* ToDoListItemTableViewCell.xib */,
 			);
 			name = XIB;
 			sourceTree = "<group>";
@@ -282,9 +298,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6521AAB91BE98FD200F53088 /* ToDoListItemTableViewCell.xib in Resources */,
 				6521AAAB1BE96EAC00F53088 /* todolist.sqlite in Resources */,
 				6545A4DB1BE2BF7E00A4E9DE /* ListItemTableViewCell.xib in Resources */,
 				65870BEE1BE882E500A00453 /* NewListViewController.xib in Resources */,
+				6521AABE1BE992CE00F53088 /* NewListItemViewController.xib in Resources */,
 				652445B51BE166D00020A2F5 /* Assets.xcassets in Resources */,
 				652445D21BE16CCF0020A2F5 /* HomeViewController.xib in Resources */,
 			);
@@ -308,7 +326,9 @@
 				652445CD1BE16B4E0020A2F5 /* ToDoListDatabase.m in Sources */,
 				65870BEC1BE882AF00A00453 /* NewListViewController.m in Sources */,
 				652445DD1BE16E0F0020A2F5 /* UIColor+Hex.m in Sources */,
+				6521AAB71BE98F2D00F53088 /* ToDoListItemTableViewCell.m in Sources */,
 				652445E31BE177DE0020A2F5 /* ToDoListDataService.m in Sources */,
+				6521AABD1BE992CE00F53088 /* NewListItemViewController.m in Sources */,
 				652445CA1BE16ACD0020A2F5 /* ToDoListItem.m in Sources */,
 				6545A4E11BE2D86700A4E9DE /* UITextView+VariableHeight.m in Sources */,
 				6521AAAE1BE979D400F53088 /* NSString+Utils.m in Sources */,

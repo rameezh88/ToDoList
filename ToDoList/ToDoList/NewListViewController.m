@@ -7,7 +7,7 @@
 //
 
 #import "NewListViewController.h"
-#import "ListItemTableViewCell.h"
+#import "ToDoListItemTableViewCell.h"
 #import "ToDoList.h"
 #import "ToDoListDataService.h"
 #import "NSString+Utils.h"
@@ -44,7 +44,7 @@
         [self.toDoList deleteItem];
     } else if (![self.titleTextView.text isEmpty] && self.listEdited) {
         self.toDoList.listName = self.titleTextView.text;
-        [self.toDoList updateDatabase];
+        [self.toDoList save];
     }
 }
 
@@ -132,24 +132,16 @@
 }
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *identifier = @"ListItemTableViewCell";
-    ListItemTableViewCell *cell = (ListItemTableViewCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
+    static NSString *identifier = @"ToDoListItemTableViewCell";
+    ToDoListItemTableViewCell *cell = (ToDoListItemTableViewCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
     if (cell == nil)
     {
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:identifier owner:self options:nil];
         cell = [nib objectAtIndex:0];
     }
     
-    cell.listItemText.attributedText = [[NSAttributedString alloc] initWithString:@"+   Add a new list" attributes:@{NSForegroundColorAttributeName: [UIColor lightGrayColor], NSFontAttributeName: [UIFont systemFontOfSize:17.0]}];
-    cell.listItemText.tag = indexPath.row;
-//    cell.listItemText.delegate = self;
-    [cell.lastModified setHidden:YES];
+    cell.itemText.tag = indexPath.row;
     return cell;
-}
-
-- (void) tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-//    ListItemTableViewCell *myCell = (ListItemTableViewCell *) cell;
-//    myCell.listItemText.delegate = nil;
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -158,55 +150,9 @@
 
 #pragma mark - UITextViewDelegate methods
 
-- (void)textViewDidBeginEditing:(UITextView *)textView{
-//    textView.attributedText = nil;
-//    textView.text = @" ";
-//    [textView setFont:[UIFont systemFontOfSize:17]];
-//    [textView setTextColor:[UIColor blackColor]];
-}
-
-- (BOOL) textViewShouldEndEditing:(UITextView *)textView {
-//    if ([textView isEqual:self.titleTextView]) {
-//        [self saveListChanges];
-//    }
-    return YES;
-}
-
 - (void)textViewDidChange:(UITextView *)textView
 {
     self.listEdited = YES;
-//    @try {
-//        ToDoList *list = self.toDoLists[textView.tag];
-//        list.listName = textView.text;
-//        self.listHeights[textView.tag] = [NSNumber numberWithDouble:[textView updateHeight]+ 30.0];
-//    }
-//    @catch (NSException *exception) {
-//
-//    }
-//    @finally {
-//
-//    }
-}
-
-- (void) textViewDidEndEditing:(UITextView *)textView {
-//    if ([textView isEqual:self.titleTextView]) {
-//        [self saveListChanges];
-//    }
-//    @try {
-//        if (textView.tag == self.listHeights.count - 1) {
-//            ToDoList *list = [ToDoList new];
-//            list.listId = [self getUniqueListId];
-//            list.listName = textView.text;
-//            [[ToDoListDataService sharedService] addNewList:list];
-//            return;
-//        }
-//
-//        [self.toDoList updateDatabase];
-//    }
-//    @catch (NSException *exception) {
-//    }
-//    @finally {
-//    }
 }
 
 @end

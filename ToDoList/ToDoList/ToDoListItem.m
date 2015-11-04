@@ -7,7 +7,16 @@
 //
 
 #import "ToDoListItem.h"
+#import "ToDoListDataService.h"
 
 @implementation ToDoListItem
+
+- (void) save {
+    [[ToDoListDataService sharedService] updateListItem:self];
+}
+
+- (void) deleteItem {
+    [[ToDoListDataService sharedService] deleteListItem:self];
+}
 
 @end

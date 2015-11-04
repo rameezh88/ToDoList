@@ -11,7 +11,7 @@
 
 @implementation ToDoList
 
-- (void) updateDatabase {
+- (void) save {
     [[ToDoListDataService sharedService] updateList:self];
 }
 

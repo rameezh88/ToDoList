@@ -12,4 +12,8 @@
 @property (nonatomic, strong) NSString *itemText, *itemId, *listId;
 @property (nonatomic, strong) NSDate *created;
 @property BOOL checked;
+
+- (void) save;
+- (void) deleteItem;
+
 @end

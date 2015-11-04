@@ -11,6 +11,6 @@
 @interface ToDoList : NSObject
 @property (nonatomic, strong) NSString *listName, *listId;
 @property (nonatomic, strong) NSDate *lastModified;
-- (void) updateDatabase;
+- (void) save;
 - (void) deleteItem;
 @end
