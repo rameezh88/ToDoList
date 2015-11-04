@@ -12,17 +12,31 @@
 
 @implementation UIViewController (CommonOperations)
 
+- (void)keyboardDidShow:(NSNotification *) notification {
+    NSLog(@"%d:%s:empty method, should be overridden", __LINE__, __FUNCTION__);
+}
+- (void)keyboardWillHide: (NSNotification *) notification {
+    NSLog(@"%d:%s:empty method, should be overridden", __LINE__, __FUNCTION__);
+}
+
 - (void) registerForKeyboardNotifications {
     // Listen for keyboard appearances and disappearances
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardDidShow:)
-                                                 name:UIKeyboardDidShowNotification
-                                               object:nil];
+    SEL keyboardDidShowSelector = NSSelectorFromString(@"keyboardDidShow:");
+    SEL keyboardWillHideSelector = NSSelectorFromString(@"keyboardWillHide:");
+    if ([self respondsToSelector:keyboardDidShowSelector]) {
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(keyboardDidShow:)
+                                                     name:UIKeyboardDidShowNotification
+                                                   object:nil];
+        
+    }
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillHide:)
-                                                 name:UIKeyboardWillHideNotification
-                                               object:nil];
+    if ([self respondsToSelector:keyboardWillHideSelector]) {
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(keyboardWillHide:)
+                                                     name:UIKeyboardWillHideNotification
+                                                   object:nil];
+    }
 }
 
 - (void) unregisterKeyboardNofifications {
