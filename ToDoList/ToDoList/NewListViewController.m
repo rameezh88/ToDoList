@@ -57,7 +57,6 @@
 
 - (void)databaseOperationEnded: (NSNotification *) notification {
     [self performSelectorOnMainThread:@selector(refreshTable) withObject:nil waitUntilDone:YES];
-//    [self refreshTable];
 }
 
 - (void) refreshTable {

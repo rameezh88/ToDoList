@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeViewController">
             <connections>
+                <outlet property="noListsView" destination="fBM-Xl-ifC" id="Ew0-kv-mbp"/>
                 <outlet property="toDoListTable" destination="4DU-Na-6kP" id="alu-ie-6dJ"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -25,13 +26,39 @@
                         <outlet property="delegate" destination="-1" id="BhI-Xe-O7c"/>
                     </connections>
                 </tableView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fBM-Xl-ifC">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You have no lists. Click on the + button above to create a new list." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jqz-sg-o1g">
+                            <rect key="frame" x="35" y="234" width="250" height="100"/>
+                            <animations/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="250" id="Qbt-wN-iAd"/>
+                                <constraint firstAttribute="height" constant="100" id="lZg-30-VNo"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <animations/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="jqz-sg-o1g" firstAttribute="centerY" secondItem="fBM-Xl-ifC" secondAttribute="centerY" id="8Qi-N0-Fv5"/>
+                        <constraint firstItem="jqz-sg-o1g" firstAttribute="centerX" secondItem="fBM-Xl-ifC" secondAttribute="centerX" id="Pgu-g6-6GS"/>
+                    </constraints>
+                </view>
             </subviews>
             <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstItem="fBM-Xl-ifC" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="0az-YI-dLb"/>
                 <constraint firstAttribute="bottom" secondItem="4DU-Na-6kP" secondAttribute="bottom" id="0zq-zF-Jkb"/>
+                <constraint firstItem="fBM-Xl-ifC" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="5c6-04-xVs"/>
+                <constraint firstAttribute="trailing" secondItem="fBM-Xl-ifC" secondAttribute="trailing" id="Zri-KV-HYf"/>
                 <constraint firstItem="4DU-Na-6kP" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="faU-4A-k0N"/>
                 <constraint firstAttribute="trailing" secondItem="4DU-Na-6kP" secondAttribute="trailing" id="nf2-Ya-r8W"/>
+                <constraint firstAttribute="bottom" secondItem="fBM-Xl-ifC" secondAttribute="bottom" id="slP-gW-859"/>
                 <constraint firstItem="4DU-Na-6kP" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="xS2-8F-ezf"/>
             </constraints>
             <point key="canvasLocation" x="274" y="308"/>

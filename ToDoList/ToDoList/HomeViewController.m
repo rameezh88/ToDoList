@@ -18,6 +18,7 @@
 
 @interface HomeViewController () <UITableViewDataSource, UITableViewDelegate, UITextViewDelegate>
 @property (nonatomic, strong) IBOutlet UITableView *toDoListTable;
+@property (nonatomic, strong) IBOutlet UIView *noListsView;
 @property (nonatomic, strong) NSMutableArray *toDoLists;
 @end
 
@@ -60,8 +61,15 @@
 
 - (void) refreshTable {
     self.toDoLists = [NSMutableArray arrayWithArray:[[ToDoListDataService sharedService] getAllLists]];
-    [self.toDoLists reverse];
-    [self.toDoListTable reloadData];
+    if ([self.toDoLists count] == 0) {
+        [self.noListsView setHidden:NO];
+        [self.toDoListTable setHidden:YES];
+    } else {
+        [self.noListsView setHidden:YES];
+        [self.toDoListTable setHidden:NO];
+        [self.toDoLists reverse];
+        [self.toDoListTable reloadData];
+    }
 }
 
 - (void) viewDidAppear:(BOOL)animated {
@@ -86,7 +94,7 @@
 }
 
 - (void)databaseOperationEnded: (NSNotification *) notification {
-    [self refreshTable];
+    [self performSelectorOnMainThread:@selector(refreshTable) withObject:nil waitUntilDone:YES];
 }
 
 #pragma mark - UITableViewDelegate methods.
@@ -148,6 +156,7 @@
             [list deleteItem];
             [self.toDoLists removeObjectAtIndex:indexPath.row];
             [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [self refreshTable];
         }];
         
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:@"Do you really want to delete this list?" cancelButtonItem:cancelItem otherButtonItems:logoutItem, nil, nil];
