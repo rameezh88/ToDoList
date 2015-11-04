@@ -13,6 +13,7 @@
 #import "ListItemTableViewCell.h"
 #import "UIViewController+CommonOperations.h"
 #import "NewListViewController.h"
+#import "UIAlertView+Blocks.h"
 #import "NSMutableArray+Reverse.h"
 
 @interface HomeViewController () <UITableViewDataSource, UITableViewDelegate, UITextViewDelegate>
@@ -131,6 +132,29 @@
     NewListViewController *nlvc = [[NewListViewController alloc] initWithNibName:@"NewListViewController" bundle:nil];
     nlvc.toDoList = self.toDoLists[indexPath.row];
     [self.navigationController pushViewController:nlvc animated:YES];
+}
+
+- (BOOL) tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        RIButtonItem *cancelItem = [RIButtonItem itemWithLabel:@"Cancel" action:^{
+        }];
+        
+        RIButtonItem *logoutItem = [RIButtonItem itemWithLabel:@"Yes" action:^{
+            ToDoList *list = self.toDoLists[indexPath.row];
+            [list deleteItem];
+            [self.toDoLists removeObjectAtIndex:indexPath.row];
+            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        }];
+        
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:@"Do you really want to delete this list?" cancelButtonItem:cancelItem otherButtonItems:logoutItem, nil, nil];
+        [alertView show];
+    } else {
+        NSLog(@"Unhandled editing style! %ld", (long)editingStyle);
+    }
 }
 
 //- (NSString *) tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
