@@ -14,7 +14,7 @@
 @interface ToDoListDataService : NSObject
 + (id)sharedService;
 - (NSArray *) getAllLists;
-- (NSArray *) getToDoListForListId:(NSInteger) listId;
+- (NSArray *) getToDoListForListId:(NSString *) listId;
 - (void) addListItem: (ToDoListItem *) item;
 - (void) updateListItem: (ToDoListItem *) item;
 - (void) deleteListItem: (ToDoListItem *) listItem;

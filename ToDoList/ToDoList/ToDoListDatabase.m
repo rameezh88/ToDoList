@@ -76,7 +76,7 @@ static NSString * syncronized_object = @"Syncronized";
 
 - (void) insertToDoListItem: (ToDoListItem *)listItem {
     @synchronized (kDatabaseOperation) {
-        NSString *sql = [NSString stringWithFormat:@"INSERT OR REPLACE INTO %s (id,todo_list_id,text,checked,created) VALUES ('%s', '%s', '%s', %ld, '%s')", [kToDoListItemsTable UTF8String], [listItem.itemId UTF8String], [listItem.listId UTF8String], [listItem.itemText UTF8String], (long)listItem.checked, [[self stringFromDate:[NSDate new]] UTF8String]];
+        NSString *sql = [NSString stringWithFormat:@"INSERT OR REPLACE INTO %s (id,todo_list_id,text,checked,created) VALUES ('%s', '%s', '%s', %ld, '%s')", [kToDoListItemsTable UTF8String], [listItem.itemId UTF8String], [listItem.listId UTF8String], [listItem.itemText UTF8String], (long)listItem.checked, [[self stringFromDate:listItem.created] UTF8String]];
         sqlite3_stmt * insertStatement;
         int retVal = sqlite3_prepare_v2(_sqlite3db, [sql UTF8String], -1, &insertStatement, NULL);
         if (retVal == SQLITE_OK) {
@@ -139,7 +139,7 @@ static NSString * syncronized_object = @"Syncronized";
             char *nameStr;
             NSString *name, *listIdStr;
             NSDate *modified;
-            arr = [[NSMutableArray alloc] initWithCapacity:8];
+            arr = [[NSMutableArray alloc] init];
             ToDoList *list;
             while (sqlite3_step(selectStatement) == SQLITE_ROW) {
                 listId = (char *)sqlite3_column_text(selectStatement, 0);
@@ -163,21 +163,21 @@ static NSString * syncronized_object = @"Syncronized";
     }
 }
 
-- (NSArray *) getToDoListForListId: (NSInteger) listId {
+- (NSArray *) getToDoListForListId: (NSString *) listId {
     if (!_sqlite3db) {
         NSLog(@"No db initialized");
         return nil;
     }
     @synchronized(syncronized_object) {
         NSMutableArray * arr = nil;
-        NSString *sql = [NSString stringWithFormat:@"select id, todo_list_id, text, checked, created from %@", kToDoListItemsTable];
+        NSString *sql = [NSString stringWithFormat:@"select id, todo_list_id, text, checked, created from %@ where todo_list_id='%s'", kToDoListItemsTable, [listId UTF8String]];
         sqlite3_stmt * selectStatement;
         int retVal = sqlite3_prepare_v2(_sqlite3db, [sql UTF8String], -1, &selectStatement, NULL);
         if (retVal == SQLITE_OK) {
             char *listId, *listItemId;
             BOOL checked;
             char *text, *created;
-            arr = [[NSMutableArray alloc] initWithCapacity:8];
+            arr = [[NSMutableArray alloc] init];
             ToDoListItem *listItem;
             while (sqlite3_step(selectStatement) == SQLITE_ROW) {
                 listItemId = (char *)sqlite3_column_text(selectStatement, 0);
@@ -189,6 +189,7 @@ static NSString * syncronized_object = @"Syncronized";
                 NSString *textStr = [NSString stringWithCString:text encoding:NSUTF8StringEncoding];
                 NSString *listItemIdStr = [NSString stringWithCString:listItemId encoding:NSUTF8StringEncoding];
                 NSString *listIdStr = [NSString stringWithCString:listId encoding:NSUTF8StringEncoding];
+                listItem = [ToDoListItem new];
                 listItem.itemId = listItemIdStr;
                 listItem.listId = listIdStr;
                 listItem.itemText = textStr;
@@ -246,15 +247,22 @@ static NSString * syncronized_object = @"Syncronized";
 }
 
 - (void) addDatabaseOperation: (NSInvocationOperation *) operation toQueue: (NSOperationQueue *) queue {
-    [queue addOperation:operation];
-    [operation setCompletionBlock:^{
-        if ([self.databaseOperationQueue operationCount] == 0) {
-            NSLog(@"All database operations complete.");
-            if (self.delegate) {
-                [self.delegate databaseReadWriteUpdateCompleted];
+    @try {
+        [queue addOperation:operation];
+        [operation setCompletionBlock:^{
+            if ([self.databaseOperationQueue operationCount] == 0) {
+                NSLog(@"All database operations complete.");
+                if (self.delegate) {
+                    [self.delegate databaseReadWriteUpdateCompleted];
+                }
             }
-        }
-    }];
+        }];
+    }
+    @catch (NSException *exception) {
+        NSLog(@"%@", exception.debugDescription);
+    }
+    @finally {
+    }
 }
 
 @end

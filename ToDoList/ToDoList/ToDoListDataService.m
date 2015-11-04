@@ -83,11 +83,15 @@
     return [self.database getAllToDoLists];
 }
 
-- (NSArray *) getToDoListForListId:(NSInteger) listId {
+- (NSArray *) getToDoListForListId:(NSString *) listId {
     return [self.database getToDoListForListId:listId];
 }
 
 - (void) addListItem: (ToDoListItem *) item {
+    NSUUID  *UUID = [NSUUID UUID];
+    NSString* stringUUID = [UUID UUIDString];
+    item.itemId = stringUUID;
+    item.created = [NSDate new];
     [self.database insertToDoListItem:item];
 }
 

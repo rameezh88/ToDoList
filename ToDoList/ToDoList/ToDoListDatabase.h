@@ -23,7 +23,7 @@
 
 - (id) initWithFile:(NSString *)path;
 - (NSArray *) getAllToDoLists;
-- (NSArray *) getToDoListForListId: (NSInteger) listId;
+- (NSArray *) getToDoListForListId: (NSString *) listId;
 - (void) updateList:(ToDoList *)list;
 - (void) insertList: (ToDoList *) list;
 - (void) updateToDoListItem:(ToDoListItem *)listItem;

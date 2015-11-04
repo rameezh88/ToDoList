@@ -9,14 +9,18 @@
 #import "NewListViewController.h"
 #import "ToDoListItemTableViewCell.h"
 #import "ToDoList.h"
+#import "ToDoListItem.h"
 #import "ToDoListDataService.h"
 #import "NSString+Utils.h"
+#import "NewListItemViewController.h"
+#import "RootNavViewController.h"
+#import "Globals.h"
 
 @interface NewListViewController () <UITableViewDataSource, UITabBarDelegate, UITextViewDelegate>
 @property (nonatomic, strong) IBOutlet UIView *listTitleView;
 @property (nonatomic, strong) IBOutlet UITableView *toDoListTable;
 @property (nonatomic, strong) IBOutlet UITextView *titleTextView;
-@property (nonatomic, strong) NSMutableArray *listHeights, *toDoListItems;
+@property (nonatomic, strong) NSMutableArray *toDoListItems;
 @property BOOL listEdited;
 @end
 
@@ -32,11 +36,71 @@
     }
     
     self.listEdited = NO;
+    [self setupAddNewItemButton];
+    [self refreshTable];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self setupViewToHideKeyboard: self.toDoListTable];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(databaseOperationEnded:)
+                                                 name:kDatabaseOperationEndedNotification
+                                               object:nil];
+    [self refreshTable];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)databaseOperationEnded: (NSNotification *) notification {
+    [self performSelectorOnMainThread:@selector(refreshTable) withObject:nil waitUntilDone:YES];
+//    [self refreshTable];
+}
+
+- (void) refreshTable {
+    @try {
+        self.toDoListItems = [NSMutableArray arrayWithArray:[self getSortedArrayByDate:[[ToDoListDataService sharedService] getToDoListForListId:self.toDoList.listId]]];
+        [self.toDoListTable reloadData];
+    }
+    @catch (NSException *exception) {
+        NSLog(@"Error. %@", exception.debugDescription);
+    }
+    @finally {
+    }
+}
+
+- (NSArray *) getSortedArrayByDate: (NSArray *) array {
+    array = [array sortedArrayUsingComparator:^NSComparisonResult(ToDoListItem *a, ToDoListItem *b) {
+        NSDate *first = a.created;
+        NSDate *second = b.created;
+        return [first compare:second];
+    }];
+    return array;
+}
+
+
+- (void) setupAddNewItemButton {
+    UIBarButtonItem *addNewListItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewListItem)];
+    self.navigationItem.rightBarButtonItem = addNewListItem;
+}
+
+- (void) addNewListItem {
+    ToDoListItem *listItem = [ToDoListItem new];
+    listItem.itemText = @"";
+    listItem.listId = self.toDoList.listId;
+    [[ToDoListDataService sharedService] addListItem:listItem];
+    [self openNewListItemControllerForItem:listItem];
+}
+
+- (void) openNewListItemControllerForItem: (ToDoListItem *) listItem {
+    NewListItemViewController *nlvc = [[NewListItemViewController alloc] initWithNibName:@"NewListItemViewController" bundle:nil];
+    nlvc.toDoListItem = listItem;
+    RootNavViewController *navCtrl = [RootNavViewController new];
+    [navCtrl setViewControllers:@[nlvc]];
+    [self presentViewController:navCtrl animated:YES completion:nil];
 }
 
 - (void) saveListChanges {
@@ -120,7 +184,7 @@
 #pragma mark - UITableViewDelegate methods.
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return [self.listHeights[indexPath.row] doubleValue];
+    return 60;//[self.listHeights[indexPath.row] doubleValue];
 }
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
@@ -140,13 +204,43 @@
         cell = [nib objectAtIndex:0];
     }
     
-    cell.itemText.tag = indexPath.row;
+    ToDoListItem *item = (ToDoListItem *) self.toDoListItems[indexPath.row];
+    cell.itemText.text = item.itemText;
+    cell.checkBox.tag = indexPath.row;
+    [cell.checkBox setSelected:item.checked];
+    [cell.checkBox addTarget:self action:@selector(handleCheckboxSelection:) forControlEvents:UIControlEventTouchUpInside];
     return cell;
+}
+
+- (void) handleCheckboxSelection: (id) sender {
+    UIButton *button = (UIButton *) sender;
+    ToDoListItem *item = (ToDoListItem *) self.toDoListItems[button.tag];
+    item.checked = !item.checked;
+    [item save];
+    [self.toDoListTable reloadData];
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    ToDoListItem *item = (ToDoListItem *) self.toDoListItems[indexPath.row];
+    [self openNewListItemControllerForItem:item];
 }
+
+- (BOOL) tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        ToDoListItem *item = (ToDoListItem *) self.toDoListItems[indexPath.row];
+        [item deleteItem];
+        [self.toDoListItems removeObjectAtIndex:indexPath.row];
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    } else {
+        NSLog(@"Unhandled editing style! %ld", (long)editingStyle);
+    }
+}
+
 
 #pragma mark - UITextViewDelegate methods
 

@@ -24,7 +24,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.itemEdited = NO;
-    self.title = ([self.toDoListItem.itemText isEmpty]) ? @"New list item" : self.toDoListItem.itemText;
+    self.title = ([self.toDoListItem.itemText isEmpty]) ? @"New list item" : @"Edit list item";
+    self.textView.text = self.toDoListItem.itemText;
     [self setupDoneButton];
 }
 
